@@ -16,6 +16,6 @@ const generateGrid = (width, height) => {
         }
     });
     return result;
-}
+}   
 
 export default generateGrid;
