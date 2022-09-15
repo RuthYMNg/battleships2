@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import generateGrid from './generateGrid.js';
+import generateGrid from '../generateGrid.js';
 
 describe('generateGrid', () => {
     it('is a function', () => {

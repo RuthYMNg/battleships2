@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import generateRandomCoordinates from './generateRandomCoordinates.js';
+import generateRandomCoordinates from '../generateRandomCoordinates.js';
 
 describe('generateRandomCoordinates', () => {
     it('is a function', () => {
