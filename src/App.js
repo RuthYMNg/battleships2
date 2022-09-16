@@ -1,3 +1,5 @@
+import Game from './components/Game.js';
+
 import './style/App.css';
 
 function App() {
@@ -7,7 +9,7 @@ function App() {
         <h1>Battleships</h1>
       </header>
       <section>
-        <h1>Game</h1>
+        <Game />
       </section>
     </div>
   );
