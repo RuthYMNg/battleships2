@@ -1,4 +1,9 @@
 import Cell from './Cell.js';
+import styled from 'styled-components';
+
+const RowContainer = styled.div`
+    display: inline-block;
+`;
 
 const Row = props => {
     const cells = props.cells.map((el, i) => {
@@ -12,9 +17,9 @@ const Row = props => {
         )
     })
     return (
-        <div className='row'>
+        <RowContainer>
             {cells}
-        </div>
+        </RowContainer>
     );
 };
 
