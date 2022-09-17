@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Grid from './Grid.js';
 
 import standardBoats from '../logic/standardBoats.js';
 import generateGrid from '../logic/generateGrid.js';
@@ -21,6 +22,9 @@ const Game = () => {
   return (
     <div>
       <h3>Game</h3>
+      <Grid 
+        grid={gridA}
+      />
     </div>
   );
 }
