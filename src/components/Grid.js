@@ -1,5 +1,5 @@
 import React from 'react';
-import Row from './Row.js'
+import Row from './Row'
 
 const Grid = props => {
     return props.grid.map((el, i) => {
