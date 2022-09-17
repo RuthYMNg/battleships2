@@ -101,7 +101,7 @@ const Setup = props => {
                 </BoatInfo>
             </BoatList>
         </SetupSectionContainer>
-        <Button><p>Start Game</p></Button>
+        <Button onClick={props.handleSetup}><p>Start Game</p></Button>
     </SetupDiv>
 };
 

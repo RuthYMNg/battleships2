@@ -7,8 +7,10 @@ const CellContainer = styled.div`
     background-color: blanchedalmond;
 `;
 
-const Cell = () => {
-    return <CellContainer className='cell'>C</CellContainer>
+const Cell = props => {
+    const cellContent = props.cell.name ? props.cell.name.split("")[0] : "0";
+
+    return <CellContainer className='cell'>{cellContent}</CellContainer>
 };
 
 export default Cell;
