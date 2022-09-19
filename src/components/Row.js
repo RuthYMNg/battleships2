@@ -17,6 +17,7 @@ const Row = props => {
                 player={props.player}
                 win={props.win}
                 turn={props.player}
+                handleFire={props.handleFire}
             />
         )
     })
@@ -31,7 +32,8 @@ Row.propTypes = {
     cells: propTypes.arrayOf(propTypes.object).isRequired,
     player: propTypes.string.isRequired,
     win: propTypes.any.isRequired,
-    turn: propTypes.string.isRequired
+    turn: propTypes.string.isRequired,
+    handleFire: propTypes.func.isRequired
 }; 
 
 export default Row;

@@ -9,6 +9,7 @@ const CellContainer = styled.div`
 `;
 
 const Cell = props => {
+    
     if (props.win && props.player === 'computer') {
       if (props.cell.name === "Carrier") {
         return <CellContainer className='carrier'><p>CA</p></CellContainer>
@@ -49,8 +50,8 @@ const Cell = props => {
       } else if (props.cell.isDiscovered) {
         return <CellContainer className='blue'><p>O</p></CellContainer>
       } else if (props.player === 'computer') {
-        return <CellContainer className={`${props.turn === 'A' ? 'cell-hover' : ''} sea`}></CellContainer>
-        // TODO: Handle clicks here
+        return <CellContainer className={`${props.player === 'A' ? 'cell-hover' : ''} sea`} onClick={props.handleFire.bind(null, props.row, props.col)}></CellContainer>
+       // return <CellContainer className={`${props.player === 'A' ? 'cell-hover' : ''} sea`} onClick={props.player === 'A' ? props.fire.bind(null, props.row, props.col) : null}></CellContainer>
       } else {
         return <CellContainer className='sea'></CellContainer>
       }
@@ -61,7 +62,8 @@ Cell.propTypes = {
     cell: propTypes.object.isRequired,
     player: propTypes.string.isRequired,
     win: propTypes.any.isRequired,
-    turn: propTypes.string.isRequired
+    turn: propTypes.string.isRequired,
+    handleFire: propTypes.func.isRequired
 }; 
 
 export default Cell;

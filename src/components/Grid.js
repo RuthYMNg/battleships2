@@ -12,6 +12,7 @@ const Grid = props => {
                 player={props.player}
                 win={props.win}
                 turn={props.player}
+                handleFire={props.handleFire}
             />  
         )
     });
@@ -21,7 +22,8 @@ Grid.propTypes = {
     grid: propTypes.arrayOf(propTypes.array).isRequired,
     player: propTypes.string.isRequired,
     win: propTypes.any.isRequired,
-    turn: propTypes.string.isRequired
+    turn: propTypes.string.isRequired,
+    handleFire: propTypes.func.isRequired
 };
 
 export default Grid;

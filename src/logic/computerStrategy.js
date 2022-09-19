@@ -8,11 +8,16 @@ const format = {
 
 const computerStrategy = (inputStrategy, grid) => {
 
+    if (inputStrategy.computerStrategy) {
+        inputStrategy = inputStrategy.computerStrategy;
+    }
+
     if (!grid) {
         return inputStrategy || format;
     }
 
     let strategy = inputStrategy ? Object.assign(inputStrategy) : format;
+    
     if (strategy.next.length) {
         let keepGoing = true;
         while (keepGoing && strategy.next.length) {
