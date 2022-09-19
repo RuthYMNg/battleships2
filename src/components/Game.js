@@ -25,6 +25,8 @@ const Game = () => {
     const [ setup, setSetup ] = useState(true);
     const [ setupBoats, setSetupBoats ] = useState(setupBoatsList);
     const [ setupSize, setSetupSize ] = useState(10);
+    const [ win, setWin ] = useState(false);
+    
     
     const handleSetup = () => {
         let newBoats = Object.entries(Object.assign(setupBoats)).reduce((acc, boat) => {
@@ -56,8 +58,23 @@ const Game = () => {
       <Setup 
         handleSetup={handleSetup}
       />
+      <h3>You</h3>
       <Grid 
+        player="human"
         grid={gridA}
+        height={height}
+        width={width}
+        win={win}
+        turn={player}
+      />
+      <h3>Computer</h3>
+      <Grid 
+        player="computer"
+        grid={gridB}
+        height={height}
+        width={width}
+        win={win}
+        turn={player}
       />
     </div>
   );

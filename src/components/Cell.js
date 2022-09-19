@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import styled from 'styled-components';
 
 const CellContainer = styled.div`
@@ -8,9 +9,59 @@ const CellContainer = styled.div`
 `;
 
 const Cell = props => {
-    const cellContent = props.cell.name ? props.cell.name.split("")[0] : "0";
+    if (props.win && props.player === 'computer') {
+      if (props.cell.name === "Carrier") {
+        return <CellContainer className='carrier'><p>CA</p></CellContainer>
+      } else if (props.cell.name === "Battleship") {
+        return <CellContainer className='battleship'><p>B</p></CellContainer>
+      } else if (props.cell.name === "Cruiser") {
+        return <CellContainer className='cruiser'><p>C</p></CellContainer>
+      } else if (props.cell.name === "Submarine") {
+        return <CellContainer className='submarine'><p>S</p></CellContainer>
+      } else if (props.cell.name === "Destroyer") {
+        return <CellContainer className='destroyer'><p>D</p></CellContainer>
+      } else if (props.cell.isDiscovered) {
+        return <CellContainer className='blue'><img src='/splash.png' alt='Splash!'/></CellContainer>
+      } else {
+        return <CellContainer className='sea'></CellContainer>
+      }
+    } else if (props.player === 'human') {
+      if (props.cell.isShip && props.cell.isDiscovered) {
+        return <CellContainer className='red'><p>X</p></CellContainer>
+      } else if (props.cell.name === "Carrier") {
+        return <CellContainer className='carrier'><p>CA</p></CellContainer>
+      } else if (props.cell.name === "Battleship") {
+        return <CellContainer className='battleship'><p>B</p></CellContainer>
+      } else if (props.cell.name === "Cruiser") {
+        return <CellContainer className='cruiser'><p>C</p></CellContainer>
+      } else if (props.cell.name === "Submarine") {
+        return <CellContainer className='submarine'><p>S</p></CellContainer>
+      } else if (props.cell.name === "Destroyer") {
+        return <CellContainer className='destroyer'><p>D</p></CellContainer>
+      } else if (props.cell.isDiscovered) {
+        return <CellContainer className='blue'><p>O</p></CellContainer>
+      } else {
+        return <CellContainer className='sea'></CellContainer>
+      }
+    } else {
+      if (props.cell.isShip && props.cell.isDiscovered) {
+        return <CellContainer className='red'><p>X</p></CellContainer>
+      } else if (props.cell.isDiscovered) {
+        return <CellContainer className='blue'><p>O</p></CellContainer>
+      } else if (props.player === 'computer') {
+        return <CellContainer className={`${props.turn === 'A' ? 'cell-hover' : ''} sea`}></CellContainer>
+        // TODO: Handle clicks here
+      } else {
+        return <CellContainer className='sea'></CellContainer>
+      }
+    }
+  };
 
-    return <CellContainer className='cell'>{cellContent}</CellContainer>
-};
+Cell.propTypes = {
+    cell: propTypes.object.isRequired,
+    player: propTypes.string.isRequired,
+    win: propTypes.any.isRequired,
+    turn: propTypes.string.isRequired
+}; 
 
 export default Cell;
