@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import styled from 'styled-components';
 
 const RowContainer = styled.div`
-    display: inline-block;
+    /* display: inline-block; */
 `;
 
 const Row = props => {

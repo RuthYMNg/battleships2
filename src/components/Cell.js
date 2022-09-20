@@ -6,6 +6,7 @@ const CellContainer = styled.div`
     width: 3rem;
     height: 3rem;
     background-color: blanchedalmond;
+    display: inline-block;
 `;
 
 const Cell = props => {
@@ -22,7 +23,7 @@ const Cell = props => {
       } else if (props.cell.name === "Destroyer") {
         return <CellContainer className='destroyer'><p>D</p></CellContainer>
       } else if (props.cell.isDiscovered) {
-        return <CellContainer className='blue'><img src='/splash.png' alt='Splash!'/></CellContainer>
+        return <CellContainer className='blue'><p>O</p></CellContainer>
       } else {
         return <CellContainer className='sea'></CellContainer>
       }

@@ -72,15 +72,13 @@ const Game = () => {
         } else {
             if (numberOfDiscovered !== numberOfBoats) {
                 handleComputerGo();
-            } else {
-              setPlayer(enemyPlayer);
-              setGridA(firedGrid);
+            } 
+              setPlayer("B");
+              setGridB(firedGrid);
               setWin(numberOfDiscovered === numberOfBoats ? "human" : false)
             }
-          
         }
         
-    }
 
     const handleComputerGo = () => {
       if (win) {
@@ -103,7 +101,8 @@ const Game = () => {
           setWin(firedGrid.reduce((acc, row) => {
             return acc + row.reduce((acc2, cell) => {
                 return cell.isShip && cell.isDiscovered ? acc2 + 1 : acc2;
-            }, 0)
+            }, 0);
+
         }, 0) === numberOfBoats ? "computer" : false);
 
       }, timer);
