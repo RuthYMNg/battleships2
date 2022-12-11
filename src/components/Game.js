@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Grid from './Grid.js';
 import Setup from './Setup.js';
+import Button from './Button.js';
 
 import standardBoats from '../logic/standardBoats.js';
 import boatsObject from '../logic/boatsObject.js';
@@ -111,29 +112,47 @@ const Game = () => {
   return (
     <div>
       <h3>Game</h3>
-      <Setup 
-        handleSetup={handleSetup}
-      />
-      <h3>You</h3>
-      <Grid 
-        player="human"
-        grid={gridA}
-        height={height}
-        width={width}
-        win={win}
-        turn={player}
-        handleFire={handleFire}
-      />
-      <h3>Computer</h3>
-      <Grid 
-        player="computer"
-        grid={gridB}
-        height={height}
-        width={width}
-        win={win}
-        turn={player}
-        handleFire={handleFire}
-      />
+      {setup ?
+        <Setup 
+          handleSetup={handleSetup}
+        /> : <></>
+      }
+      {!setup ? 
+        <section>
+          <section>
+            <h3>You</h3>
+            <Grid 
+              player="human"
+              grid={gridA}
+              height={height}
+              width={width}
+              win={win}
+              turn={player}
+              handleFire={handleFire}
+            />
+          </section>
+          <section>
+            <h3>Computer</h3>
+            <Grid 
+              player="computer"
+              grid={gridB}
+              height={height}
+              width={width}
+              win={win}
+              turn={player}
+              handleFire={handleFire}
+            />
+          </section>
+        </section> : <></>
+      }
+      
+      <section>
+      {win ? <div>
+                <p>{win === "human" ? "YOU WIN!" : "THE COMPUTER HAS DEFEATED YOU :("}</p>
+                <Button>Create a new game</Button>
+            </div> : player === 'A' ? <h5 className='selectedPlayer'>Your turn</h5> : <h5 className='selectedPlayer'>Computer thinking</h5>}
+            {win ? <div></div> : <Button>Quit</Button>}
+      </section>
     </div>
   );
 }
