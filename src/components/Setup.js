@@ -18,40 +18,120 @@ const Text = styled.p`
 `;
 
 const SetupBar = styled.div`
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+
+    div {
+        width: 50px;
+    }
 `;
 
 const BoatList = styled.div`
     display: inline-block;
+
+    @media only screen and (min-width: 740px) {
+        display: flex;
+        justify-content: center;
+    }
 `;
 
 const BoatInfo = styled.div`
+    padding: 0 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const BoatContainer = styled.div`
-    display: inline-block;
+    width: 100% !important;
+    height: 30px;
+    border: 2px solid #005982;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0;
 `;
+
+const SetupBoat = styled.div`
+    font-family: 'Ubuntu', cursive !important;
+    margin-top: 6px;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #005982;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media only screen and (max-width: 420px) {
+    height: 28px;
+    width: 28px;
+    border: 1px solid #005982;
+    }
+`
 
 const BoatName = styled.h5`
 `;
 
 const GridSizeCell = styled.div`
-    display: inline-block;
+
+    @keyframes animateWidth {
+        0% {width:50px;}
+        100% {width:100px;}
+    }
+
+    height: 50px;
+    width: 50px;
+    border: 2px solid #005982;
+    margin: 0;
+    background-color: #15739e;
+    margin: 5px;
+    animation-duration: .3s;
+    animation-fill-mode: both;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: #a3e3ef8f;
+        cursor: pointer;
+    }
+
+    &.active-size {
+        background-color: #b12929;
+        animation-name: animateWidth;
+
+
+        &:hover {
+            background-color: #b12929;
+            color: grey !important;
+        }
+    }
+
+    @media only screen and (max-width: 420px) {
+        height: 28px;
+        width: 28px;
+        border: 1px solid #005982;
+    }
 `;
 
 const Setup = props => {
+    console.log(props.size);
+    
     return <SetupDiv>
         <SetupSectionContainer>
             <Subtitle>Select Ocean Size</Subtitle>
             <Text>Number of squares wide and high</Text>
             <SetupBar>
-                <GridSizeCell><p>6</p></GridSizeCell>
-                <GridSizeCell><p>7</p></GridSizeCell>
-                <GridSizeCell><p>8</p></GridSizeCell>
-                <GridSizeCell><p>9</p></GridSizeCell>
-                <GridSizeCell><p>10</p></GridSizeCell>
-                <GridSizeCell><p>11</p></GridSizeCell>
-                <GridSizeCell><p>12</p></GridSizeCell>
+                <GridSizeCell className={`${props.size === 6 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 6)}><p>6</p></GridSizeCell>
+                <GridSizeCell className={`${props.size === 7 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 7)}><p>7</p></GridSizeCell>
+                <GridSizeCell className={`${props.size === 8 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 8)}><p>8</p></GridSizeCell>
+                <GridSizeCell className={`${props.size === 9 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 9)}><p>9</p></GridSizeCell>
+                <GridSizeCell className={`${props.size === 10 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 10)}><p>10</p></GridSizeCell>
+                <GridSizeCell className={`${props.size === 11 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 11)}><p>11</p></GridSizeCell>
+                <GridSizeCell className={`${props.size === 12 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 12)}><p>12</p></GridSizeCell>
             </SetupBar>
         </SetupSectionContainer>
         <SetupSectionContainer>
@@ -59,43 +139,43 @@ const Setup = props => {
             <BoatList>
                 <BoatInfo>
                     <BoatContainer>
-                        <div className='setup-boat carrier'><p>CA</p></div>
-                        <div className='setup-boat carrier'><p>CA</p></div>
-                        <div className='setup-boat carrier'><p>CA</p></div>
-                        <div className='setup-boat carrier'><p>CA</p></div>
-                        <div className='setup-boat carrier'><p>CA</p></div>
+                        <SetupBoat className='carrier'><p>CA</p></SetupBoat>
+                        <SetupBoat className='carrier'><p>CA</p></SetupBoat>
+                        <SetupBoat className='carrier'><p>CA</p></SetupBoat>
+                        <SetupBoat className='carrier'><p>CA</p></SetupBoat>
+                        <SetupBoat className='carrier'><p>CA</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>CARRIER</BoatName>
                 </BoatInfo>
                 <BoatInfo>
                     <BoatContainer>
-                        <div className='setup-boat battleship'><p>B</p></div>
-                        <div className='setup-boat battleship'><p>B</p></div>
-                        <div className='setup-boat battleship'><p>B</p></div>
-                        <div className='setup-boat battleship'><p>B</p></div>
+                        <SetupBoat className='battleship'><p>B</p></SetupBoat>
+                        <SetupBoat className='battleship'><p>B</p></SetupBoat>
+                        <SetupBoat className='battleship'><p>B</p></SetupBoat>
+                        <SetupBoat className='battleship'><p>B</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>BATTLESHIP</BoatName>
                 </BoatInfo>
                 <BoatInfo>
                     <BoatContainer>
-                        <div className='setup-boat cruiser'><p>C</p></div>
-                        <div className='setup-boat cruiser'><p>C</p></div>
-                        <div className='setup-boat cruiser'><p>C</p></div>
+                        <SetupBoat className='cruiser'><p>C</p></SetupBoat>
+                        <SetupBoat className='cruiser'><p>C</p></SetupBoat>
+                        <SetupBoat className='cruiser'><p>C</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>CRUISER</BoatName>
                 </BoatInfo>
                 <BoatInfo>
                     <BoatContainer>
-                        <div className='setup-boat submarine'><p>S</p></div>
-                        <div className='setup-boat submarine'><p>S</p></div>
-                        <div className='setup-boat submarine'><p>S</p></div>
+                        <SetupBoat className='submarine'><p>S</p></SetupBoat>
+                        <SetupBoat className='submarine'><p>S</p></SetupBoat>
+                        <SetupBoat className='submarine'><p>S</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>SUBMARINE</BoatName>
                 </BoatInfo>
                 <BoatInfo>
                     <BoatContainer>
-                        <div className='setup-boat destroyer'><p>D</p></div>
-                        <div className='setup-boat destroyer'><p>D</p></div>
+                        <SetupBoat className='destroyer'><p>D</p></SetupBoat>
+                        <SetupBoat className='destroyer'><p>D</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>DESTROYER</BoatName>
                 </BoatInfo>

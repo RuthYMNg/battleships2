@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-    border: red;
+    background-color: #15739e;
+    border-radius: 5px;
+    width: 200px;
+    padding: 8px 10px;
+    margin: 0 auto;
+    cursor: pointer;
 
-    p {
-        color: blue;
-    }
+    &:hover {
+    background-color: #a3e3ef8f;
+}
 `;
 
 export default Button;

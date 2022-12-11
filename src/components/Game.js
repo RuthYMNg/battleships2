@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Grid from './Grid.js';
 import Setup from './Setup.js';
 import Button from './Button.js';
-
 import standardBoats from '../logic/standardBoats.js';
 import boatsObject from '../logic/boatsObject.js';
 import setupBoatsList from '../logic/setupBoats.js';
@@ -10,6 +10,15 @@ import generateGrid from '../logic/generateGrid.js';
 import fetchComputerStrategy from '../logic/computerStrategy.js';
 import fire from '../logic/fire.js';
 import createGame from '../logic/createGame.js';
+
+const GridsArea = styled.section`
+  display: flex;
+  justify-content: center;
+`
+
+const GridContainer = styled.section`
+  margin: 3rem;
+`
 
 const Game = () => {
 
@@ -48,7 +57,7 @@ const Game = () => {
                 return cell.isShip ? acc2 + 1 : acc2;
             }, 0)
         }, 0);
-
+      
         window.scrollTo(0, 0);
 
         setSetup(false)
@@ -135,17 +144,22 @@ const Game = () => {
     setDev(!dev);
   }
 
+  const handleUpdateGridSize = (newSize) => {
+    setSetupSize(newSize);
+}
+
   return (
     <div>
-      <h3>Game</h3>
       {setup ?
         <Setup 
           handleSetup={handleSetup}
+          handleUpdateGridSize={handleUpdateGridSize}
+          size={setupSize}
         /> : <></>
       }
       {!setup ? 
-        <section>
-          <section>
+        <GridsArea>
+          <GridContainer>
             <h3>You</h3>
             <Grid 
               player="human"
@@ -156,8 +170,8 @@ const Game = () => {
               turn={player}
               handleFire={handleFire}
             />
-          </section>
-          <section>
+          </GridContainer>
+          <GridContainer>
             <h3>Computer</h3>
             <Grid 
               player="computer"
@@ -169,8 +183,8 @@ const Game = () => {
               handleFire={handleFire}
               dev={dev}
             />
-          </section>
-        </section> : <></>
+          </GridContainer>
+        </GridsArea> : <></>
       }
       
       <section>

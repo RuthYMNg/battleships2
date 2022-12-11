@@ -3,7 +3,11 @@ import propTypes from 'prop-types';
 import styled from 'styled-components';
 
 const RowContainer = styled.div`
-    /* display: inline-block; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    margin: 0;
 `;
 
 const Row = props => {
