@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FaChevronLeft } from "@react-icons/all-files/fa/FaChevronLeft.js";
+import { FaChevronRight } from "@react-icons/all-files/fa/FaChevronRight.js";
 
 import Button from './Button.js';
 
@@ -118,7 +120,9 @@ const GridSizeCell = styled.div`
 `;
 
 const Setup = props => {
-    console.log(props.size);
+    console.log(props.boats.carrier.number);
+    // TODO: Chevrons don't work yet on click
+
     
     return <SetupDiv>
         <SetupSectionContainer>
@@ -146,6 +150,11 @@ const Setup = props => {
                         <SetupBoat className='carrier'><p>CA</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>CARRIER</BoatName>
+                    <SetupBar>
+                        <h4 className={`icon ${props.boats.carrier.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'carrier', 'down')}><FaChevronLeft /></h4>
+                        <h4 className='icon'>{props.boats.carrier.number}</h4>
+                        <h4 className={`icon ${props.boats.carrier.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'carrier', 'up')}><FaChevronRight /></h4>
+                    </SetupBar>
                 </BoatInfo>
                 <BoatInfo>
                     <BoatContainer>
