@@ -46,6 +46,10 @@ const Cell = props => {
         return <CellContainer className='sea'></CellContainer>
       }
     } else {
+
+      if (props.dev && props.cell.isShip && !props.cell.isDiscovered && props.player === 'computer') {
+        return  <CellContainer className={`${props.player === 'A' ? 'cell-hover' : ''} sea`} onClick={props.handleFire.bind(null, props.row, props.col)}>.</CellContainer>
+      }
       if (props.cell.isShip && props.cell.isDiscovered) {
         return <CellContainer className='red'><p>X</p></CellContainer>
       } else if (props.cell.isDiscovered) {

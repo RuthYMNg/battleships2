@@ -29,6 +29,7 @@ const Game = () => {
     const [ setupBoats, setSetupBoats ] = useState(setupBoatsList);
     const [ setupSize, setSetupSize ] = useState(10);
     const [ win, setWin ] = useState(false);
+    const [ dev, setDev ] = useState(true);
     
     
     
@@ -128,7 +129,11 @@ const Game = () => {
     });
     setWin(false);
     setSetup(true);
-}
+  }
+
+  const toggleDev = () => {
+    setDev(!dev);
+  }
 
   return (
     <div>
@@ -162,6 +167,7 @@ const Game = () => {
               win={win}
               turn={player}
               handleFire={handleFire}
+              dev={dev}
             />
           </section>
         </section> : <></>
@@ -173,6 +179,9 @@ const Game = () => {
                 <Button onClick={reset}>Create a new game</Button>
             </div> : player === 'A' ? <h5 className='selectedPlayer'>Your turn</h5> : <h5 className='selectedPlayer'>Computer thinking</h5>}
             {win ? <div></div> : <Button>Quit</Button>}
+      </section>
+      <section>
+        <Button onClick={toggleDev}>USE DEV</Button>
       </section>
     </div>
   );

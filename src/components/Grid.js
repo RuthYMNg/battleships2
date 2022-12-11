@@ -13,6 +13,7 @@ const Grid = props => {
                 win={props.win}
                 turn={props.player}
                 handleFire={props.handleFire}
+                dev={props.dev}
             />  
         )
     });
