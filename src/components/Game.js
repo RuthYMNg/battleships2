@@ -180,12 +180,13 @@ const Game = () => {
 
   const handleUpdateGridSize = (newSize) => {
     setSetupSize(newSize);
+    setWidth(newSize);
+    setHeight(newSize);
   }
 
   const handleUpdateBoats = (boat, direction) => {
-    console.log(boat, direction);
     
-    let newBoats = Object.assign(setupBoats)
+    let newBoats = {...setupBoats}
     let checkNumber = Object.entries(newBoats).reduce((acc, boat) => {
         return acc + boat[1].number
     }, 0);
@@ -229,7 +230,6 @@ const Game = () => {
         newBoats[boat].minReached = false;
       }
     }
-    console.log('Changing boats');
     setSetupBoats(newBoats);
   }
 
