@@ -43,6 +43,11 @@ const Buttons = styled.section`
   }
 `
 
+const DevCheat = styled.div`
+  color: #166bb4;
+  text-align: right;
+`
+
 const Game = () => {
 
     const [ width, setWidth ] = useState(10);
@@ -292,7 +297,7 @@ const Game = () => {
           </Buttons>
       }
       <section>
-        <Button onClick={toggleDev}>USE DEV</Button>
+        <DevCheat onClick={toggleDev}>USE DEV</DevCheat>
       </section>
     </div>
   );

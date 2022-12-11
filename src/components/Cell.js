@@ -88,7 +88,7 @@ const Cell = props => {
     } else {
       
       if (props.dev && props.cell.isShip && !props.cell.isDiscovered && props.player === 'computer') {
-        return  <CellContainer className={`${props.player === 'computer' ? 'cell-hover' : ''} sea`} onClick={props.handleFire.bind(null, props.row, props.col)}>.</CellContainer>
+        return  <CellContainer className={`${props.player === 'computer' ? 'cell-hover' : ''} sea`} onClick={props.handleFire.bind(null, props.row, props.col)}>!</CellContainer>
       }
       if (props.cell.isShip && props.cell.isDiscovered) {
         return <CellContainer className='red'><img src={fire} alt='Explosion'/></CellContainer>
