@@ -230,6 +230,10 @@ const Game = () => {
 
   return (
     <div>
+      {win ? <div className={win === 'human' ? 'pyro' : 'explosion'}>
+                <div className="before"></div>
+                <div className="after"></div>
+            </div> : <p></p>}
       {setup ?
         <Setup 
           handleSetup={handleSetup}
