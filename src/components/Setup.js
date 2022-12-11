@@ -202,6 +202,7 @@ const Setup = props => {
         </SetupSectionContainer>
         <Buttons>
             <Button onClick={props.handleSetup}><p>Start Game</p></Button>
+            <Button onClick={props.toggleInstructions}><p>How to play</p></Button>
         </Buttons>
     </SetupDiv>
 };

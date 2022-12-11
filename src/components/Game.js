@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Grid from './Grid.js';
 import Setup from './Setup.js';
 import Button from './Button.js';
+import Instructions from './Instructions.js';
 import standardBoats from '../logic/standardBoats.js';
 import boatsObject from '../logic/boatsObject.js';
 import setupBoatsList from '../logic/setupBoats.js';
@@ -56,6 +57,7 @@ const Game = () => {
     const [ win, setWin ] = useState(false);
     const [ dev, setDev ] = useState(true);
     const [ setupOK, setSetupOK ] = useState(true);
+    const [ instructions, setInstructions ] = useState(false);
     
     
     
@@ -161,60 +163,70 @@ const Game = () => {
     setDev(!dev);
   }
 
+  const toggleInstructions = () => {
+    setInstructions(!instructions); 
+  }
+
   const handleUpdateGridSize = (newSize) => {
     setSetupSize(newSize);
-}
+  }
 
-const handleUpdateBoats = (boat, direction) => {
-  console.log(boat, direction);
-  
-  let newBoats = Object.assign(setupBoats)
-  let checkNumber = Object.entries(newBoats).reduce((acc, boat) => {
-      return acc + boat[1].number
-  }, 0);
-  if (checkNumber < 3 && direction === 'down') {
-      for (let boat in newBoats) {
-          newBoats[boat].minReached = true
-      }
-      setSetupOK('small');
-      
-      return;
-  } else if (checkNumber < 3 && direction === 'up') {
-      for (let boat in newBoats) {
-          if (newBoats[boat].number !== 0) {
-              newBoats[boat].minReached = false
-          }
-      }
-  }
-  if (checkNumber > 8 && direction === 'up') {
-      for (let boat in newBoats) {
-          newBoats[boat].maxReached = true
-      }
-      return;
-  } else {
-      for (let boat in newBoats) {
-          if (newBoats[boat].number !== newBoats[boat].max) {
-              newBoats[boat].maxReached = false
-          }
-      }
-  }
-  if (setupOK) {
-    newBoats[boat].number = direction === 'up' ? newBoats[boat].number !== newBoats[boat].max ? newBoats[boat].number + 1 : newBoats[boat].number : newBoats[boat].number - 1 < 0 ? 0 : newBoats[boat].number - 1;
+  const handleUpdateBoats = (boat, direction) => {
+    console.log(boat, direction);
     
-    if (newBoats[boat].number === newBoats[boat].max) {
-      newBoats[boat].maxReached = true;
-    } else {
-      newBoats[boat].maxReached = false;
+    let newBoats = Object.assign(setupBoats)
+    let checkNumber = Object.entries(newBoats).reduce((acc, boat) => {
+        return acc + boat[1].number
+    }, 0);
+    if (checkNumber < 3 && direction === 'down') {
+        for (let boat in newBoats) {
+            newBoats[boat].minReached = true
+        }
+        setSetupOK('small');
+        
+        return;
+    } else if (checkNumber < 3 && direction === 'up') {
+        for (let boat in newBoats) {
+            if (newBoats[boat].number !== 0) {
+                newBoats[boat].minReached = false
+            }
+        }
     }
-    if (newBoats[boat].number === 0) {
-      newBoats[boat].minReached = true;
+    if (checkNumber > 8 && direction === 'up') {
+        for (let boat in newBoats) {
+            newBoats[boat].maxReached = true
+        }
+        return;
     } else {
-      newBoats[boat].minReached = false;
+        for (let boat in newBoats) {
+            if (newBoats[boat].number !== newBoats[boat].max) {
+                newBoats[boat].maxReached = false
+            }
+        }
     }
+    if (setupOK) {
+      newBoats[boat].number = direction === 'up' ? newBoats[boat].number !== newBoats[boat].max ? newBoats[boat].number + 1 : newBoats[boat].number : newBoats[boat].number - 1 < 0 ? 0 : newBoats[boat].number - 1;
+      
+      if (newBoats[boat].number === newBoats[boat].max) {
+        newBoats[boat].maxReached = true;
+      } else {
+        newBoats[boat].maxReached = false;
+      }
+      if (newBoats[boat].number === 0) {
+        newBoats[boat].minReached = true;
+      } else {
+        newBoats[boat].minReached = false;
+      }
+    }
+    console.log('Changing boats');
+    setSetupBoats(newBoats);
   }
-  console.log('Changing boats');
-  setSetupBoats(newBoats);
-}
+
+  if (instructions) {
+    return <Instructions 
+        toggleInstructions={toggleInstructions}
+    />
+  }
 
   return (
     <div>
@@ -225,6 +237,7 @@ const handleUpdateBoats = (boat, direction) => {
           handleUpdateBoats={handleUpdateBoats}
           size={setupSize}
           boats={setupBoats}
+          toggleInstructions={toggleInstructions}
         /> : <></>
       }
       {!setup ? 
