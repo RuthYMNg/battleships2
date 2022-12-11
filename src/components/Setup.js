@@ -90,16 +90,16 @@ const Buttons = styled.section`
 const GridSizeCell = styled.div`
 
     @keyframes animateWidth {
-        0% {width:50px;}
-        100% {width:100px;}
+        0% {width:5rem;}
+        100% {width:10rem;}
     }
 
-    height: 50px;
-    width: 50px;
+    height: 5rem;
+    width: 5rem;
     border: 2px solid #005982;
     margin: 0;
     background-color: #15739e;
-    margin: 5px;
+    margin: .5rem;
     animation-duration: .3s;
     animation-fill-mode: both;
     display: flex;
@@ -123,8 +123,8 @@ const GridSizeCell = styled.div`
     }
 
     @media only screen and (max-width: 420px) {
-        height: 28px;
-        width: 28px;
+        height: 2.8rem;
+        width: 2.8rem;
         border: 1px solid #005982;
     }
 `;

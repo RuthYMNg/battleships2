@@ -44,7 +44,7 @@ const Buttons = styled.section`
 `
 
 const DevCheat = styled.div`
-  color: #166bb4;
+  color: blue;
   text-align: right;
 `
 
