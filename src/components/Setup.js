@@ -77,6 +77,16 @@ const SetupBoat = styled.div`
 const BoatName = styled.h5`
 `;
 
+const Buttons = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  button {
+    margin: 1.5rem auto;
+  }
+`
+
 const GridSizeCell = styled.div`
 
     @keyframes animateWidth {
@@ -190,7 +200,9 @@ const Setup = props => {
                 </BoatInfo>
             </BoatList>
         </SetupSectionContainer>
-        <Button onClick={props.handleSetup}><p>Start Game</p></Button>
+        <Buttons>
+            <Button onClick={props.handleSetup}><p>Start Game</p></Button>
+        </Buttons>
     </SetupDiv>
 };
 

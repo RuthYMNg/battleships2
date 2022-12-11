@@ -20,6 +20,22 @@ const GridContainer = styled.section`
   margin: 3rem;
 `
 
+const Buttons = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  button {
+    margin: 3rem auto;
+  }
+`
+
 const Game = () => {
 
     const [ width, setWidth ] = useState(10);
@@ -240,14 +256,16 @@ const handleUpdateBoats = (boat, direction) => {
           </GridContainer>
         </GridsArea> : <></>
       }
-      
-      <section>
-      {win ? <div>
-                <p>{win === "human" ? "YOU WIN!" : "THE COMPUTER HAS DEFEATED YOU :("}</p>
-                <Button onClick={reset}>Create a new game</Button>
-            </div> : player === 'A' ? <h5 className='selectedPlayer'>Your turn</h5> : <h5 className='selectedPlayer'>Computer thinking</h5>}
-            {win ? <div></div> : <Button>Quit</Button>}
-      </section>
+      {
+        setup ? <></> :
+          <Buttons>
+          {win ? <div>
+                    <p>{win === "human" ? "YOU WIN!" : "THE COMPUTER HAS DEFEATED YOU :("}</p>
+                    <Button onClick={reset}><p>Create a new game</p></Button>
+                </div> : player === 'A' ? <h5 className='selectedPlayer'>Your turn</h5> : <h5 className='selectedPlayer'>Computer thinking</h5>}
+                {win ? <div></div> : <Button onClick={reset}><p>Quit</p></Button>}
+          </Buttons>
+      }
       <section>
         <Button onClick={toggleDev}>USE DEV</Button>
       </section>
