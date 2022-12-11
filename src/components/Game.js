@@ -109,6 +109,27 @@ const Game = () => {
       }, timer);
   }
 
+  const reset = () => {
+    const newGame = createGame(generateGrid(), generateGrid())
+    const numberOfBoats = newGame.playerA.reduce((acc, row) => {
+        return acc + row.reduce((acc2, cell) => {
+            return cell.isShip ? acc2 + 1 : acc2;
+        }, 0)
+    }, 0);
+    setGridA(newGame.playerA);
+    setGridB(newGame.playerB);
+    setNumberOfBoats(numberOfBoats);
+    setBoats([]);
+    setPlayer("A");
+    setComputerStrategy({
+      next: [],
+      plan: [],
+      lastTry: []
+    });
+    setWin(false);
+    setSetup(true);
+}
+
   return (
     <div>
       <h3>Game</h3>
@@ -149,7 +170,7 @@ const Game = () => {
       <section>
       {win ? <div>
                 <p>{win === "human" ? "YOU WIN!" : "THE COMPUTER HAS DEFEATED YOU :("}</p>
-                <Button>Create a new game</Button>
+                <Button onClick={reset}>Create a new game</Button>
             </div> : player === 'A' ? <h5 className='selectedPlayer'>Your turn</h5> : <h5 className='selectedPlayer'>Computer thinking</h5>}
             {win ? <div></div> : <Button>Quit</Button>}
       </section>
