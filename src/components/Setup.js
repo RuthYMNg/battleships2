@@ -174,6 +174,11 @@ const Setup = props => {
                         <SetupBoat className='battleship'><p>B</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>BATTLESHIP</BoatName>
+                    <SetupBar>
+                        <h4 className={`icon ${props.boats.battleship.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'battleship', 'down')}><FaChevronLeft /></h4>
+                        <h4 className='icon'>{props.boats.battleship.number}</h4>
+                        <h4 className={`icon ${props.boats.battleship.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'battleship', 'up')}><FaChevronRight /></h4>
+                    </SetupBar>
                 </BoatInfo>
                 <BoatInfo>
                     <BoatContainer>
@@ -182,6 +187,11 @@ const Setup = props => {
                         <SetupBoat className='cruiser'><p>C</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>CRUISER</BoatName>
+                    <SetupBar>
+                        <h4 className={`icon ${props.boats.cruiser.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'cruiser', 'down')}><FaChevronLeft /></h4>
+                        <h4 className='icon'>{props.boats.cruiser.number}</h4>
+                        <h4 className={`icon ${props.boats.cruiser.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'cruiser', 'up')}><FaChevronRight /></h4>
+                    </SetupBar>
                 </BoatInfo>
                 <BoatInfo>
                     <BoatContainer>
@@ -190,6 +200,11 @@ const Setup = props => {
                         <SetupBoat className='submarine'><p>S</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>SUBMARINE</BoatName>
+                    <SetupBar>
+                        <h4 className={`icon ${props.boats.submarine.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'submarine', 'down')}><FaChevronLeft /></h4>
+                        <h4 className='icon'>{props.boats.submarine.number}</h4>
+                        <h4 className={`icon ${props.boats.submarine.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'submarine', 'up')}><FaChevronRight /></h4>
+                    </SetupBar>
                 </BoatInfo>
                 <BoatInfo>
                     <BoatContainer>
@@ -197,6 +212,11 @@ const Setup = props => {
                         <SetupBoat className='destroyer'><p>D</p></SetupBoat>
                     </BoatContainer>
                     <BoatName>DESTROYER</BoatName>
+                    <SetupBar>
+                        <h4 className={`icon ${props.boats.destroyer.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'destroyer', 'down')}><FaChevronLeft /></h4>
+                        <h4 className='icon'>{props.boats.destroyer.number}</h4>
+                        <h4 className={`icon ${props.boats.destroyer.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'destroyer', 'up')}><FaChevronRight /></h4>
+                    </SetupBar>
                 </BoatInfo>
             </BoatList>
         </SetupSectionContainer>
