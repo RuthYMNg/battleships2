@@ -2,6 +2,9 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 
+import fire from '../style/fire.png';
+import splash from '../style/splash.png';
+
 const CellContainer = styled.div`
   height: 35px;
   width: 35px;
@@ -60,13 +63,13 @@ const Cell = props => {
       } else if (props.cell.name === "Destroyer") {
         return <CellContainer className='destroyer'><p>D</p></CellContainer>
       } else if (props.cell.isDiscovered) {
-        return <CellContainer className='blue'><p>O</p></CellContainer>
+        return <CellContainer className='blue'><img src={splash} alt='Splash!'/></CellContainer>
       } else {
         return <CellContainer className='sea'></CellContainer>
       }
     } else if (props.player === 'human') {
       if (props.cell.isShip && props.cell.isDiscovered) {
-        return <CellContainer className='red'><p>X</p></CellContainer>
+        return <CellContainer className='red'><img src={fire} alt='Explosion'/></CellContainer>
       } else if (props.cell.name === "Carrier") {
         return <CellContainer className='carrier'><p>CA</p></CellContainer>
       } else if (props.cell.name === "Battleship") {
@@ -78,7 +81,7 @@ const Cell = props => {
       } else if (props.cell.name === "Destroyer") {
         return <CellContainer className='destroyer'><p>D</p></CellContainer>
       } else if (props.cell.isDiscovered) {
-        return <CellContainer className='blue'><p>O</p></CellContainer>
+        return <CellContainer className='blue'><img src={splash} alt='Splash!'/></CellContainer>
       } else {
         return <CellContainer className='sea'></CellContainer>
       }
@@ -88,9 +91,9 @@ const Cell = props => {
         return  <CellContainer className={`${props.player === 'computer' ? 'cell-hover' : ''} sea`} onClick={props.handleFire.bind(null, props.row, props.col)}>.</CellContainer>
       }
       if (props.cell.isShip && props.cell.isDiscovered) {
-        return <CellContainer className='red'><p>X</p></CellContainer>
+        return <CellContainer className='red'><img src={fire} alt='Explosion'/></CellContainer>
       } else if (props.cell.isDiscovered) {
-        return <CellContainer className='blue'><p>O</p></CellContainer>
+        return <CellContainer className='blue'><img src={splash} alt='Splash!'/></CellContainer>
       } else if (props.player === 'computer') {
         return <CellContainer className={`${props.player === 'computer' ? 'cell-hover' : ''} sea`} onClick={props.handleFire.bind(null, props.row, props.col)}></CellContainer>
        // return <CellContainer className={`${props.player === 'A' ? 'cell-hover' : ''} sea`} onClick={props.player === 'A' ? props.fire.bind(null, props.row, props.col) : null}></CellContainer>

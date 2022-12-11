@@ -19,6 +19,12 @@ const GridsArea = styled.section`
 
 const GridContainer = styled.section`
   margin: 3rem;
+  h3 {
+    font-family: Ubuntu, cursive;
+    margin: 2rem 0;
+    font-size: 2.5rem;
+    text-align: center;
+  }
 `
 
 const Buttons = styled.section`
@@ -248,6 +254,7 @@ const Game = () => {
         <GridsArea>
           <GridContainer>
             <h3>You</h3>
+            {player === 'B' ? win ? <h5 className='deselectedPlayer'>Computer is firing...</h5> : <h5 className='selectedPlayer'>Computer is firing...</h5> : <h5 className='deselectedPlayer'>Computer is firing...</h5>}
             <Grid 
               player="human"
               grid={gridA}
@@ -260,6 +267,7 @@ const Game = () => {
           </GridContainer>
           <GridContainer>
             <h3>Computer</h3>
+            {player === 'A' && !win ? <h5 className='selectedPlayer'>Choose where to fire!</h5> : <h5 className='deselectedPlayer'>Choose where to fire!</h5>}
             <Grid 
               player="computer"
               grid={gridB}

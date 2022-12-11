@@ -93,6 +93,10 @@ h2, h3, h4, h5, h6, p {
   font-family: 'Ubuntu', cursive;
 }
 
+.setup h2, .setup h3, .setup h4 {
+  font-family: 'Russo One', cursive;
+}
+
 p {
   text-align: center;
   font-size: 15px;

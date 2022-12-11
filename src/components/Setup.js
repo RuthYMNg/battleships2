@@ -134,7 +134,7 @@ const Setup = props => {
     // TODO: Chevrons don't work yet on click
 
     
-    return <SetupDiv>
+    return <SetupDiv className='setup'>
         <SetupSectionContainer>
             <Subtitle>Select Ocean Size</Subtitle>
             <Text>Number of squares wide and high</Text>
