@@ -26,6 +26,10 @@ const SetupBar = styled.div`
     div {
         width: 50px;
     }
+
+    .active-arrow {
+        color: gray !important;
+    }
 `;
 
 const BoatList = styled.div`

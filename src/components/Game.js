@@ -155,83 +155,83 @@ const Game = () => {
         return acc + row.reduce((acc2, cell) => {
             return cell.isShip ? acc2 + 1 : acc2;
         }, 0)
-    }, 0);
-    setGridA(newGame.playerA);
-    setGridB(newGame.playerB);
-    setNumberOfBoats(numberOfBoats);
-    setBoats([]);
-    setPlayer("A");
-    setComputerStrategy({
-      next: [],
-      plan: [],
-      lastTry: []
-    });
-    setWin(false);
-    setSetup(true);
-  }
-
-  const toggleDev = () => {
-    setDev(!dev);
-  }
-
-  const toggleInstructions = () => {
-    setInstructions(!instructions); 
-  }
-
-  const handleUpdateGridSize = (newSize) => {
-    setSetupSize(newSize);
-    setWidth(newSize);
-    setHeight(newSize);
-  }
-
-  const handleUpdateBoats = (boat, direction) => {
-    
-    let newBoats = {...setupBoats}
-    let checkNumber = Object.entries(newBoats).reduce((acc, boat) => {
-        return acc + boat[1].number
-    }, 0);
-    if (checkNumber < 3 && direction === 'down') {
-        for (let boat in newBoats) {
-            newBoats[boat].minReached = true
-        }
-        setSetupOK('small');
-        
-        return;
-    } else if (checkNumber < 3 && direction === 'up') {
-        for (let boat in newBoats) {
-            if (newBoats[boat].number !== 0) {
-                newBoats[boat].minReached = false
-            }
-        }
+      }, 0);
+      setGridA(newGame.playerA);
+      setGridB(newGame.playerB);
+      setNumberOfBoats(numberOfBoats);
+      setBoats([]);
+      setPlayer("A");
+      setComputerStrategy({
+        next: [],
+        plan: [],
+        lastTry: []
+      });
+      setWin(false);
+      setSetup(true);
     }
-    if (checkNumber > 8 && direction === 'up') {
-        for (let boat in newBoats) {
-            newBoats[boat].maxReached = true
-        }
-        return;
-    } else {
-        for (let boat in newBoats) {
-            if (newBoats[boat].number !== newBoats[boat].max) {
-                newBoats[boat].maxReached = false
-            }
-        }
+
+    const toggleDev = () => {
+      setDev(!dev);
     }
-    if (setupOK) {
-      newBoats[boat].number = direction === 'up' ? newBoats[boat].number !== newBoats[boat].max ? newBoats[boat].number + 1 : newBoats[boat].number : newBoats[boat].number - 1 < 0 ? 0 : newBoats[boat].number - 1;
+
+    const toggleInstructions = () => {
+      setInstructions(!instructions); 
+    }
+
+    const handleUpdateGridSize = (newSize) => {
+      setSetupSize(newSize);
+      setWidth(newSize);
+      setHeight(newSize);
+    }
+
+    const handleUpdateBoats = (boat, direction) => {
       
-      if (newBoats[boat].number === newBoats[boat].max) {
-        newBoats[boat].maxReached = true;
-      } else {
-        newBoats[boat].maxReached = false;
+      let newBoats = {...setupBoats}
+      let checkNumber = Object.entries(newBoats).reduce((acc, boat) => {
+          return acc + boat[1].number
+      }, 0);
+      if (checkNumber < 3 && direction === 'down') {
+          for (let boat in newBoats) {
+              newBoats[boat].minReached = true
+          }
+          setSetupOK('small');
+          
+          return;
+      } else if (checkNumber < 3 && direction === 'up') {
+          for (let boat in newBoats) {
+              if (newBoats[boat].number !== 0) {
+                  newBoats[boat].minReached = false
+              }
+          }
       }
-      if (newBoats[boat].number === 0) {
-        newBoats[boat].minReached = true;
+      if (checkNumber > 8 && direction === 'up') {
+          for (let boat in newBoats) {
+              newBoats[boat].maxReached = true
+          }
+          return;
       } else {
-        newBoats[boat].minReached = false;
+          for (let boat in newBoats) {
+              if (newBoats[boat].number !== newBoats[boat].max) {
+                  newBoats[boat].maxReached = false
+              }
+          }
       }
+      if (setupOK) {
+        newBoats[boat].number = direction === 'up' ? newBoats[boat].number !== newBoats[boat].max ? newBoats[boat].number + 1 : newBoats[boat].number : newBoats[boat].number - 1 < 0 ? 0 : newBoats[boat].number - 1;
+        
+        if (newBoats[boat].number === newBoats[boat].max) {
+          newBoats[boat].maxReached = true;
+        } else {
+          newBoats[boat].maxReached = false;
+        }
+        if (newBoats[boat].number === 0) {
+          newBoats[boat].minReached = true;
+        } else {
+          newBoats[boat].minReached = false;
+        }
+      }
+      setSetupBoats(newBoats);
     }
-    setSetupBoats(newBoats);
-  }
 
   if (instructions) {
     return <Instructions 
