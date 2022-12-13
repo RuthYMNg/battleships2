@@ -179,6 +179,8 @@ const Game = () => {
     }
 
     const handleUpdateGridSize = (newSize) => {
+      console.log(newSize);
+      
       setSetupSize(newSize);
       setWidth(newSize);
       setHeight(newSize);

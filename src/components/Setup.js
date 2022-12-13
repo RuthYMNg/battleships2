@@ -93,10 +93,10 @@ const Buttons = styled.section`
 
 const GridSizeCell = styled.div`
 
-    @keyframes animateWidth {
+    /* @keyframes animateWidth {
         0% {width:5rem;}
         100% {width:10rem;}
-    }
+    } */
 
     height: 5rem;
     width: 5rem;
@@ -109,6 +109,7 @@ const GridSizeCell = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all .4s ease-in-out;
 
     &:hover {
         background-color: #a3e3ef8f;
@@ -117,7 +118,7 @@ const GridSizeCell = styled.div`
 
     &.active-size {
         background-color: #b12929;
-        animation-name: animateWidth;
+        width: 100px;
 
 
         &:hover {
@@ -134,22 +135,17 @@ const GridSizeCell = styled.div`
 `;
 
 const Setup = props => {
-    console.log(props.boats.carrier.number);
     // TODO: Chevrons don't work yet on click
+    const gridSizeCells = [6,7,8,9,10,11,12].map((num, i) => {
+        return <GridSizeCell key={`gridsize${i}`} className={`${props.size === num ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, num)}><p>{num}</p></GridSizeCell>
+    })
 
-    
     return <SetupDiv className='setup'>
         <SetupSectionContainer>
             <Subtitle>Select Ocean Size</Subtitle>
             <Text>Number of squares wide and high</Text>
             <SetupBar>
-                <GridSizeCell className={`${props.size === 6 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 6)}><p>6</p></GridSizeCell>
-                <GridSizeCell className={`${props.size === 7 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 7)}><p>7</p></GridSizeCell>
-                <GridSizeCell className={`${props.size === 8 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 8)}><p>8</p></GridSizeCell>
-                <GridSizeCell className={`${props.size === 9 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 9)}><p>9</p></GridSizeCell>
-                <GridSizeCell className={`${props.size === 10 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 10)}><p>10</p></GridSizeCell>
-                <GridSizeCell className={`${props.size === 11 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 11)}><p>11</p></GridSizeCell>
-                <GridSizeCell className={`${props.size === 12 ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, 12)}><p>12</p></GridSizeCell>
+                {gridSizeCells}
             </SetupBar>
         </SetupSectionContainer>
         <SetupSectionContainer>
