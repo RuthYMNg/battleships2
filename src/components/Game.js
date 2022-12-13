@@ -70,8 +70,9 @@ const Game = () => {
     const [ setupOK, setSetupOK ] = useState(true);
     const [ instructions, setInstructions ] = useState(false);
     
-    
-    
+    // TODO: Handle API call errors for fetch users
+
+    // TODO: Need to handle edge case in case grid is too small
     const handleSetup = () => {
         let newBoats = Object.entries(Object.assign(setupBoats)).reduce((acc, boat) => {
             for (let i = 0; i < boat[1].number; i++) {
@@ -96,58 +97,60 @@ const Game = () => {
         setGridB(newGame.playerB)
     }
 
-    const handleFire = (x, y) => {
-        const enemyGrid = player === "A" ? gridB.slice() : gridA.slice();
-        const enemyPlayer = player === "A" ? "B" : "A";
-        const firedGrid = fire(player, enemyGrid, y, x);
-        const numberOfDiscovered = firedGrid.reduce((acc, row) => {
-            return acc + row.reduce((acc2, cell) => {
-                return cell.isShip && cell.isDiscovered ? acc2 + 1 : acc2;
-            }, 0)
-        }, 0);
+const handleFire = (x, y) => {
+    
+  const enemyGrid = player === "A" ? gridB.slice() : gridA.slice();
+  const enemyPlayer = player === "A" ? "B" : "A";
+  const firedGrid = fire(player, enemyGrid, y, x);
+  const numberOfDiscovered = firedGrid.reduce((acc, row) => {
+    return acc + row.reduce((acc2, cell) => {
+      return cell.isShip && cell.isDiscovered ? acc2 + 1 : acc2;
+    }, 0)
+  }, 0);
 
-        if (enemyPlayer === "A") {
-          setPlayer(enemyPlayer);
-          setGridA(firedGrid);
-          setWin(numberOfDiscovered === numberOfBoats ? "human" : false)
-        } else {
-            if (numberOfDiscovered !== numberOfBoats) {
-                handleComputerGo();
-            } 
-              setPlayer("B");
-              setGridB(firedGrid);
-              setWin(numberOfDiscovered === numberOfBoats ? "human" : false)
-            }
-        }
+  if (enemyPlayer === "A") {
+    setPlayer(enemyPlayer);
+    setGridA(firedGrid);
+    setWin(numberOfDiscovered === numberOfBoats ? "human" : false)
+  } else {
+    if (numberOfDiscovered !== numberOfBoats) {
+      handleComputerGo();
+    } 
+    setPlayer("B");
+    setGridB(firedGrid);
+    setWin(numberOfDiscovered === numberOfBoats ? "human" : false)
+  }
+}
         
 
-    const handleComputerGo = () => {
-      if (win) {
-          return;
-      }
-
-      const timer = 500 + Math.random() * 1000;
-
-      setTimeout(() => {
-          let strategy = fetchComputerStrategy(computerStrategy, gridA)
-
-          setComputerStrategy({
-              computerStrategy: strategy
-          })
-
-          const firedGrid = fire(player, gridA.slice(), strategy.lastTry[0], strategy.lastTry[1])
-
-          setGridA(firedGrid);
-          setPlayer("A");
-          setWin(firedGrid.reduce((acc, row) => {
-            return acc + row.reduce((acc2, cell) => {
-                return cell.isShip && cell.isDiscovered ? acc2 + 1 : acc2;
-            }, 0);
-
-        }, 0) === numberOfBoats ? "computer" : false);
-
-      }, timer);
+const handleComputerGo = () => {
+  if (win) {
+    return;
   }
+
+  const timer = 500 + Math.random() * 1000;
+
+  setTimeout(() => {
+    let strategy = fetchComputerStrategy(computerStrategy, gridA);
+
+
+    setComputerStrategy({
+        computerStrategy: strategy
+    })
+
+    const firedGrid = fire(player, gridA.slice(), strategy.lastTry[0], strategy.lastTry[1]);
+
+    setGridA(firedGrid);
+    setPlayer("A");
+    setWin(firedGrid.reduce((acc, row) => {
+      return acc + row.reduce((acc2, cell) => {
+          return cell.isShip && cell.isDiscovered ? acc2 + 1 : acc2;
+      }, 0);
+
+    }, 0) === numberOfBoats ? "computer" : false);
+
+  }, timer);
+}
 
   const reset = () => {
     const newGame = createGame(generateGrid(), generateGrid())

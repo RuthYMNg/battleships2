@@ -130,9 +130,6 @@ const GridSizeCell = styled.div`
 `;
 
 const Setup = props => {
-    console.log(props.boats.carrier.number);
-    // TODO: Chevrons don't work yet on click
-
     
     return <SetupDiv className='setup'>
         <SetupSectionContainer>
