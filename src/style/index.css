@@ -90,11 +90,11 @@ h5 {
 }
 
 h2, h3, h4, h5, h6, p {
-  font-family: 'Ubuntu', cursive;
+  font-family: 'Ubuntu', monospace;
 }
 
 .setup h2, .setup h3, .setup h4 {
-  font-family: 'Russo One', cursive;
+  font-family: 'Russo One', monospace;
 }
 
 p {
@@ -465,7 +465,7 @@ code {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  box-shadow: -120px -218.66667px orange, 248px -16.66667px orange, 190px 16.33333px orange, -113px -308.66667px orangered, -109px -287.66667px yellow, -5rem -313.66667px orangered, 226px -31.66667px red, 180px -351.66667px red, -12px -338.66667px red, 220px -388.66667px red, -69px -27.66667px yellow, -111px -339.66667px orange, 155px -237.66667px yellow, -152px -380.66667px orangered, -5rem -37.66667px orange, -95px -175.66667px red, -88px 10.33333px orangered, 112px -309.66667px orangered, 69px -415.66667px yellow, 168px -100.66667px yellow, -244px 24.33333px orange, 97px -325.66667px yellow, -211px -182.66667px yellow, 236px -126.66667px red, 14rem -196.66667px red, 125px -175.66667px orange, 118px -381.66667px red, 144px -111.66667px red, 36px -78.66667px yellow, -63px -196.66667px orangered, -218px -227.66667px red, -134px -377.66667px yellow, -36px -412.66667px red, 209px -106.66667px yellow, 91px -278.66667px orange, -22px -191.66667px yellow, 139px -392.66667px red, 56px -2.66667px orange, -156px -276.66667px red, -163px -233.66667px red, -238px -346.66667px orange, 62px -363.66667px yellow, 244px -170.66667px orangered, 224px -142.66667px red, 141px -208.66667px orange, 211px -285.66667px orangered, 181px -128.66667px yellow, 90px -123.66667px orange, 189px 70.33333px yellow, -18px -383.66667px orange, 100px -6.66667px orangered;
+  box-shadow: -120px -218.66667px orange, 248px -16.66667px orange, 190px 16.33333px orange, -113px -308.66667px orangered, -109px -287.66667px orangered, -5rem -313.66667px orangered, 226px -31.66667px red, 180px -351.66667px red, -12px -338.66667px red, 220px -388.66667px red, -69px -27.66667px orangered, -111px -339.66667px orange, 155px -237.66667px orangered, -152px -380.66667px orangered, -5rem -37.66667px orange, -95px -175.66667px red, -88px 10.33333px orangered, 112px -309.66667px orangered, 69px -415.66667px orangered, 168px -100.66667px orangered, -244px 24.33333px orange, 97px -325.66667px orangered, -211px -182.66667px orangered, 236px -126.66667px red, 14rem -196.66667px red, 125px -175.66667px orange, 118px -381.66667px red, 144px -111.66667px red, 36px -78.66667px orangered, -63px -196.66667px orangered, -218px -227.66667px red, -134px -377.66667px orangered, -36px -412.66667px red, 209px -106.66667px orangered, 91px -278.66667px orange, -22px -191.66667px orangered, 139px -392.66667px red, 56px -2.66667px orange, -156px -276.66667px red, -163px -233.66667px red, -238px -346.66667px orange, 62px -363.66667px orangered, 244px -170.66667px orangered, 224px -142.66667px red, 141px -208.66667px orange, 211px -285.66667px orangered, 181px -128.66667px orangered, 90px -123.66667px orange, 189px 70.33333px orangered, -18px -383.66667px orange, 100px -6.66667px orangered;
   -moz-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
   -webkit-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
   -o-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
