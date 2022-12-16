@@ -4,7 +4,6 @@ import Grid from './Grid.js';
 import Setup from './Setup.js';
 import Button from './Button.js';
 import Instructions from './Instructions.js';
-import standardBoats from '../logic/standardBoats.js';
 import boatsObject from '../logic/boatsObject.js';
 import setupBoatsList from '../logic/setupBoats.js';
 import generateGrid from '../logic/generateGrid.js';
