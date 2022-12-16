@@ -15,8 +15,8 @@ const CellContainer = styled.div`
   align-items: center;
 
   @media only screen and (max-width: 420px) {
-    height: 28px;
-    width: 28px;
+    height: 31px;
+    width: 31px;
     border: 1px solid #005982;
   }
 

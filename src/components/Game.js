@@ -14,14 +14,20 @@ import createGame from '../logic/createGame.js';
 
 const GridsArea = styled.section`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 `
 
 const GridContainer = styled.section`
   margin: 3rem;
+
+  @media only screen and (max-width: 740px) {
+    margin: 0 0 2rem;
+  }
+
   h3 {
     font-family: Ubuntu, cursive;
-    margin: 2rem 0;
+    margin: 0 0 1rem !important;
     font-size: 2.5rem;
     text-align: center;
   }

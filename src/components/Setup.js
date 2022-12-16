@@ -8,7 +8,16 @@ import Button from './Button.js';
 const SetupDiv = styled.div``;
 
 const SetupSectionContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
     margin-bottom: 5rem;
+
+    @media only screen and (max-width: 740px) {
+        margin-bottom: 2.5rem;
+    }
 `;
 
 const Subtitle = styled.h4`
@@ -16,12 +25,16 @@ const Subtitle = styled.h4`
 `;
 
 const Text = styled.p`
-    margin-top: 0;
+    margin: 0 0 1rem 0;
 `;
 
 const SetupBar = styled.div`
     display: flex;
     justify-content: center;
+
+    h4 {
+        margin: 0 !important;
+    }
 
     div {
         width: 50px;
@@ -34,9 +47,24 @@ const SetupBar = styled.div`
 
 const BoatList = styled.div`
     display: inline-block;
+    width: 100%;
 
-    @media only screen and (min-width: 740px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: row; 
+
+    @media only screen and (max-width: 740px) {
+        flex-direction: column;
+    }
+`;
+
+const BoatSmallScreenGrouper = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    @media only screen and (max-width: 740px) {
         display: flex;
+        flex-direction: row;
         justify-content: center;
     }
 `;
@@ -46,6 +74,15 @@ const BoatInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media only screen and (max-width: 740px) {
+        width: 40%;
+
+        &.top-row {
+            width: 80% !important;
+            margin: 0 auto;
+        }
+    }
 `;
 
 const BoatContainer = styled.div`
@@ -72,9 +109,9 @@ const SetupBoat = styled.div`
     align-items: center;
 
     @media only screen and (max-width: 420px) {
-    height: 28px;
-    width: 28px;
-    border: 1px solid #005982;
+        height: 28px;
+        width: 28px;
+        border: 1px solid #005982;
     }
 `
 
@@ -92,12 +129,6 @@ const Buttons = styled.section`
 `
 
 const GridSizeCell = styled.div`
-
-    /* @keyframes animateWidth {
-        0% {width:5rem;}
-        100% {width:10rem;}
-    } */
-
     height: 5rem;
     width: 5rem;
     border: 2px solid #005982;
@@ -127,17 +158,25 @@ const GridSizeCell = styled.div`
         }
     }
 
-    @media only screen and (max-width: 420px) {
-        height: 2.8rem;
-        width: 2.8rem;
-        border: 1px solid #005982;
+    @media only screen and (max-width: 740px) {
+
+        &.hidden-small {
+            display: none;
+        }
+
+        &.active-size {
+            background-color: #b12929;
+            width: 90px;
+        }
     }
 `;
 
 const Setup = props => {
     // TODO: Chevrons don't work yet on click
     const gridSizeCells = [6,7,8,9,10,11,12].map((num, i) => {
-        return <GridSizeCell key={`gridsize${i}`} className={`${props.size === num ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, num)}><p>{num}</p></GridSizeCell>
+        return num < 11 
+            ? <GridSizeCell key={`gridsize${i}`} className={`${props.size === num ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, num)}><p>{num}</p></GridSizeCell> 
+            : <GridSizeCell key={`gridsize${i}`} className={`hidden-small ${props.size === num ? 'active-size' : 'inactive'}`} onClick={props.handleUpdateGridSize.bind(null, num)}><p>{num}</p></GridSizeCell>
     })
 
     return <SetupDiv className='setup'>
@@ -151,7 +190,7 @@ const Setup = props => {
         <SetupSectionContainer>
             <Subtitle>Select Battleships</Subtitle>
             <BoatList>
-                <BoatInfo>
+                <BoatInfo className='top-row'>
                     <BoatContainer>
                         <SetupBoat className='carrier'><p>CA</p></SetupBoat>
                         <SetupBoat className='carrier'><p>CA</p></SetupBoat>
@@ -166,58 +205,62 @@ const Setup = props => {
                         <h4 className={`icon ${props.boats.carrier.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'carrier', 'up')}><FaChevronRight /></h4>
                     </SetupBar>
                 </BoatInfo>
-                <BoatInfo>
-                    <BoatContainer>
-                        <SetupBoat className='battleship'><p>B</p></SetupBoat>
-                        <SetupBoat className='battleship'><p>B</p></SetupBoat>
-                        <SetupBoat className='battleship'><p>B</p></SetupBoat>
-                        <SetupBoat className='battleship'><p>B</p></SetupBoat>
-                    </BoatContainer>
-                    <BoatName>BATTLESHIP</BoatName>
-                    <SetupBar>
-                        <h4 className={`icon ${props.boats.battleship.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'battleship', 'down')}><FaChevronLeft /></h4>
-                        <h4 className='icon'>{props.boats.battleship.number}</h4>
-                        <h4 className={`icon ${props.boats.battleship.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'battleship', 'up')}><FaChevronRight /></h4>
-                    </SetupBar>
-                </BoatInfo>
-                <BoatInfo>
-                    <BoatContainer>
-                        <SetupBoat className='cruiser'><p>C</p></SetupBoat>
-                        <SetupBoat className='cruiser'><p>C</p></SetupBoat>
-                        <SetupBoat className='cruiser'><p>C</p></SetupBoat>
-                    </BoatContainer>
-                    <BoatName>CRUISER</BoatName>
-                    <SetupBar>
-                        <h4 className={`icon ${props.boats.cruiser.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'cruiser', 'down')}><FaChevronLeft /></h4>
-                        <h4 className='icon'>{props.boats.cruiser.number}</h4>
-                        <h4 className={`icon ${props.boats.cruiser.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'cruiser', 'up')}><FaChevronRight /></h4>
-                    </SetupBar>
-                </BoatInfo>
-                <BoatInfo>
-                    <BoatContainer>
-                        <SetupBoat className='submarine'><p>S</p></SetupBoat>
-                        <SetupBoat className='submarine'><p>S</p></SetupBoat>
-                        <SetupBoat className='submarine'><p>S</p></SetupBoat>
-                    </BoatContainer>
-                    <BoatName>SUBMARINE</BoatName>
-                    <SetupBar>
-                        <h4 className={`icon ${props.boats.submarine.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'submarine', 'down')}><FaChevronLeft /></h4>
-                        <h4 className='icon'>{props.boats.submarine.number}</h4>
-                        <h4 className={`icon ${props.boats.submarine.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'submarine', 'up')}><FaChevronRight /></h4>
-                    </SetupBar>
-                </BoatInfo>
-                <BoatInfo>
-                    <BoatContainer>
-                        <SetupBoat className='destroyer'><p>D</p></SetupBoat>
-                        <SetupBoat className='destroyer'><p>D</p></SetupBoat>
-                    </BoatContainer>
-                    <BoatName>DESTROYER</BoatName>
-                    <SetupBar>
-                        <h4 className={`icon ${props.boats.destroyer.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'destroyer', 'down')}><FaChevronLeft /></h4>
-                        <h4 className='icon'>{props.boats.destroyer.number}</h4>
-                        <h4 className={`icon ${props.boats.destroyer.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'destroyer', 'up')}><FaChevronRight /></h4>
-                    </SetupBar>
-                </BoatInfo>
+                <BoatSmallScreenGrouper>
+                    <BoatInfo>
+                        <BoatContainer>
+                            <SetupBoat className='battleship'><p>B</p></SetupBoat>
+                            <SetupBoat className='battleship'><p>B</p></SetupBoat>
+                            <SetupBoat className='battleship'><p>B</p></SetupBoat>
+                            <SetupBoat className='battleship'><p>B</p></SetupBoat>
+                        </BoatContainer>
+                        <BoatName>BATTLESHIP</BoatName>
+                        <SetupBar>
+                            <h4 className={`icon ${props.boats.battleship.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'battleship', 'down')}><FaChevronLeft /></h4>
+                            <h4 className='icon'>{props.boats.battleship.number}</h4>
+                            <h4 className={`icon ${props.boats.battleship.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'battleship', 'up')}><FaChevronRight /></h4>
+                        </SetupBar>
+                    </BoatInfo>
+                    <BoatInfo>
+                        <BoatContainer>
+                            <SetupBoat className='cruiser'><p>C</p></SetupBoat>
+                            <SetupBoat className='cruiser'><p>C</p></SetupBoat>
+                            <SetupBoat className='cruiser'><p>C</p></SetupBoat>
+                        </BoatContainer>
+                        <BoatName>CRUISER</BoatName>
+                        <SetupBar>
+                            <h4 className={`icon ${props.boats.cruiser.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'cruiser', 'down')}><FaChevronLeft /></h4>
+                            <h4 className='icon'>{props.boats.cruiser.number}</h4>
+                            <h4 className={`icon ${props.boats.cruiser.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'cruiser', 'up')}><FaChevronRight /></h4>
+                        </SetupBar>
+                    </BoatInfo>
+                </ BoatSmallScreenGrouper>
+                <BoatSmallScreenGrouper>
+                    <BoatInfo>
+                        <BoatContainer>
+                            <SetupBoat className='submarine'><p>S</p></SetupBoat>
+                            <SetupBoat className='submarine'><p>S</p></SetupBoat>
+                            <SetupBoat className='submarine'><p>S</p></SetupBoat>
+                        </BoatContainer>
+                        <BoatName>SUBMARINE</BoatName>
+                        <SetupBar>
+                            <h4 className={`icon ${props.boats.submarine.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'submarine', 'down')}><FaChevronLeft /></h4>
+                            <h4 className='icon'>{props.boats.submarine.number}</h4>
+                            <h4 className={`icon ${props.boats.submarine.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'submarine', 'up')}><FaChevronRight /></h4>
+                        </SetupBar>
+                    </BoatInfo>
+                    <BoatInfo>
+                        <BoatContainer>
+                            <SetupBoat className='destroyer'><p>D</p></SetupBoat>
+                            <SetupBoat className='destroyer'><p>D</p></SetupBoat>
+                        </BoatContainer>
+                        <BoatName>DESTROYER</BoatName>
+                        <SetupBar>
+                            <h4 className={`icon ${props.boats.destroyer.minReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'destroyer', 'down')}><FaChevronLeft /></h4>
+                            <h4 className='icon'>{props.boats.destroyer.number}</h4>
+                            <h4 className={`icon ${props.boats.destroyer.maxReached ? 'active-arrow' : ''}`} onClick={props.handleUpdateBoats.bind(null, 'destroyer', 'up')}><FaChevronRight /></h4>
+                        </SetupBar>
+                    </BoatInfo>
+                </BoatSmallScreenGrouper>
             </BoatList>
         </SetupSectionContainer>
         <Buttons>
