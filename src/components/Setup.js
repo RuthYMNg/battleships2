@@ -37,7 +37,7 @@ const SetupBar = styled.div`
     }
 
     div {
-        width: 50px;
+        width: 5rem;
     }
 
     .active-arrow {
@@ -70,7 +70,7 @@ const BoatSmallScreenGrouper = styled.div`
 `;
 
 const BoatInfo = styled.div`
-    padding: 0 10px 10px 10px;
+    padding: 0 1rem 1rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,7 +87,7 @@ const BoatInfo = styled.div`
 
 const BoatContainer = styled.div`
     width: 100% !important;
-    height: 30px;
+    height: 3rem;
     border: 2px solid #005982;
     display: flex;
     flex-direction: row;
@@ -99,9 +99,9 @@ const BoatContainer = styled.div`
 
 const SetupBoat = styled.div`
     font-family: 'Ubuntu', cursive !important;
-    margin-top: 6px;
-    height: 30px;
-    width: 30px;
+    margin-top: .6rem;
+    height: 3rem;
+    width: 3rem;
     border: 2px solid #005982;
     margin: 0;
     display: flex;
@@ -109,8 +109,8 @@ const SetupBoat = styled.div`
     align-items: center;
 
     @media only screen and (max-width: 420px) {
-        height: 28px;
-        width: 28px;
+        height: 2.8rem;
+        width: 2.8rem;
         border: 1px solid #005982;
     }
 `
@@ -149,7 +149,7 @@ const GridSizeCell = styled.div`
 
     &.active-size {
         background-color: #b12929;
-        width: 100px;
+        width: 10rem;
 
 
         &:hover {
@@ -166,7 +166,7 @@ const GridSizeCell = styled.div`
 
         &.active-size {
             background-color: #b12929;
-            width: 90px;
+            width: 9rem;
         }
     }
 `;

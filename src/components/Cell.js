@@ -6,8 +6,8 @@ import fire from '../style/fire.png';
 import splash from '../style/splash.png';
 
 const CellContainer = styled.div`
-  height: 35px;
-  width: 35px;
+  height: 3.5rem;
+  width: 3.5rem;
   border: 2px solid #005982;
   margin: 0;
   display: flex;
@@ -15,8 +15,8 @@ const CellContainer = styled.div`
   align-items: center;
 
   @media only screen and (max-width: 420px) {
-    height: 31px;
-    width: 31px;
+    height: 3.1rem;
+    width: 3.1rem;
     border: 1px solid #005982;
   }
 
@@ -26,7 +26,7 @@ const CellContainer = styled.div`
   }
 
   p {
-    margin-top: 6px;
+    margin-top: .6rem;
   }
 
   &.red {
