@@ -15,10 +15,14 @@ const GridsArea = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  @media only screen and (max-width: 740px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 const GridContainer = styled.section`
-  margin: 3rem;
+  margin: 0 3rem 3rem 3rem;
 
   @media only screen and (max-width: 740px) {
     margin: 0 0 2rem;
@@ -44,7 +48,7 @@ const Buttons = styled.section`
   }
 
   button {
-    margin: 3rem auto;
+    margin: 2rem auto;
   }
 `
 

@@ -13,7 +13,7 @@ const SetupSectionContainer = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
 
     @media only screen and (max-width: 740px) {
         margin-bottom: 2.5rem;

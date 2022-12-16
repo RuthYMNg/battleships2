@@ -34,7 +34,7 @@ h1, h2, h3, h4, h5, h6, p {
   font-weight: normal;
 } 
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 720px) {
   h1 {
     font-size: 5rem !important;
     margin-bottom: 1rem !important;
@@ -116,7 +116,7 @@ code {
 }
 
 /*MOVE*/
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 720px) {
   .grid {
     padding: 0.5rem 0 0.5rem 0 !important;
   }
@@ -180,7 +180,7 @@ code {
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 720px) {
   .hidden-xs {
     visibility: hidden;
     width: 0 !important;
@@ -193,7 +193,7 @@ code {
   }
 }
 
-@media only screen and (min-width: 420px) {
+@media only screen and (min-width: 720px) {
   .hidden-lg {
     visibility: hidden;
     width: 0 !important;
