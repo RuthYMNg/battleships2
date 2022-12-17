@@ -25,7 +25,12 @@ const getStrategy = (grid) => {
                     plan.push(set)
                 })
         }
-        return plan;
+        return plan.reduce((acc, el) => {
+            if (el.length) {
+                acc.push(el);
+            }
+            return acc;
+        }, []);
     }
 
     if (strategy === "forwardDiagonal") {
@@ -40,7 +45,12 @@ const getStrategy = (grid) => {
                     plan.push(set)
                 })
         }
-        return plan;
+        return plan.reduce((acc, el) => {
+            if (el.length) {
+                acc.push(el);
+            }
+            return acc;
+        }, []);
     }
 
     if (strategy === "backwardDiagonal") {
@@ -55,7 +65,12 @@ const getStrategy = (grid) => {
                     plan.push(set)
                 })
         }
-        return plan;
+        return plan.reduce((acc, el) => {
+            if (el.length) {
+                acc.push(el);
+            }
+            return acc;
+        }, []);
     }
 }
 

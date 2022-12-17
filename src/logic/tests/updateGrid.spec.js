@@ -47,7 +47,7 @@ describe('updateGrid', () => {
             boat: boat,
             x: 0,
             y: 0,
-            dir: "down"
+            dir: "right"
         }
         const result = updateGrid(grid, directions)
         expect(result[0][0].name).to.equal("Destroyer");

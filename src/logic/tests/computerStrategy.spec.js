@@ -1,22 +1,44 @@
 import { expect } from 'chai';
 import computerStrategy from '../computerStrategy.js';
+import generateGrid from '../generateGrid.js';
 
 describe('computerStrategy', () => {
     it('is a function', () => {
         expect(computerStrategy).to.be.a('function');
     });
     it('returns an object', () => {
-        expect(typeof computerStrategy()).to.equal('object');
+        let strategy = {
+            next: [],
+            plan: [],
+            lastTry: []
+        };
+        let grid = generateGrid();
+        let result = computerStrategy(strategy, grid);
+        expect(typeof result).to.equal('object');
     });
     it('has three key value pairs', () => {
-        expect(computerStrategy()).to.haveOwnProperty('next');
-        expect(computerStrategy()).to.haveOwnProperty('plan');
-        expect(computerStrategy()).to.haveOwnProperty('lastTry');
+        let strategy = {
+            next: [],
+            plan: [],
+            lastTry: []
+        };
+        let grid = generateGrid();
+        let result = computerStrategy(strategy, grid);
+        expect(result).to.haveOwnProperty('next');
+        expect(result).to.haveOwnProperty('plan');
+        expect(result).to.haveOwnProperty('lastTry');
     });
     it('has values which are all arrays', () => {
-        expect(Array.isArray(computerStrategy().next)).to.equal(true);
-        expect(Array.isArray(computerStrategy().plan)).to.equal(true);
-        expect(Array.isArray(computerStrategy().lastTry)).to.equal(true);
+        let strategy = {
+            next: [],
+            plan: [],
+            lastTry: []
+        };
+        let grid = generateGrid();
+        let result = computerStrategy(strategy, grid);
+        expect(Array.isArray(result.next)).to.equal(true);
+        expect(Array.isArray(result.plan)).to.equal(true);
+        expect(Array.isArray(result.lastTry)).to.equal(true);
     });
     it('returns default if there is no grid', () => {
         const input = {
