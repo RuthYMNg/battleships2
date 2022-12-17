@@ -166,7 +166,7 @@ const GridSizeCell = styled.div`
 
         &.active-size {
             background-color: #b12929;
-            width: 9rem;
+            width: 9rem ;
         }
     }
 `;
