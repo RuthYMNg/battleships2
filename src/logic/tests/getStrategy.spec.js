@@ -12,7 +12,7 @@ describe('getStrategy', () => {
         const grid = [[[], [], []], [[], [], []], [[], [], []]]
         expect(getStrategy(grid).length > 0).to.equal(true);
     });
-    it.only('returns an array of arrays of pairs of numbers when there is a grid', () => {
+    it('returns an array of arrays of pairs of numbers when there is a grid', () => {
         const grid = [[[], [], []], [[], [], []], [[], [], []]]
         const result = getStrategy(grid)
         expect(typeof result[0][0][0]).to.equal('number') ||

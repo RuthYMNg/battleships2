@@ -169,4 +169,19 @@ describe('tryToPlace', () => {
         expect(result2).to.eql(null);
         expect(result3).to.not.eql(null);
     });
+    it('returns an object', () => {
+        const grid  = generateGrid();
+        const destroyer = standardBoats[4];
+        const result = tryToPlace(grid, destroyer, [0, 0], "right");
+        expect(typeof result).to.eql("object");
+    });
+    it('returns an object with four properties', () => {
+        const grid  = generateGrid();
+        const destroyer = standardBoats[4];
+        const result = tryToPlace(grid, destroyer, [0, 0], "right");
+        expect(result).to.haveOwnProperty("boat");
+        expect(result).to.haveOwnProperty("x");
+        expect(result).to.haveOwnProperty("y");
+        expect(result).to.haveOwnProperty("dir");
+    });
 });
