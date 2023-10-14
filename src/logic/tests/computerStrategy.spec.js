@@ -239,12 +239,18 @@ describe('computerStrategy', () => {
         const strategy = {
             next: [],
             plan: [[0, 0], [1, 1], [2, 2]],
-            lastTry: []
+            lastTry: [],
+            firstHit: null,
+            direction: null,
+            boatHits: []
         }
         const output = {
             next: [[1, 0], [0, 1]],
             plan: [[1, 1], [2, 2]],
-            lastTry: [0, 0]
+            lastTry: [0, 0],
+            firstHit: [0,0],
+            direction: null,
+            boatHits: [[0,0]]
         }
         const grid = [
             [

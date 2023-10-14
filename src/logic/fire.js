@@ -1,4 +1,5 @@
 const fire = (player, grid, x, y) => {
+    
     let newGrid = JSON.parse(JSON.stringify(grid))
     if (
         !player ||
@@ -9,6 +10,7 @@ const fire = (player, grid, x, y) => {
     ) {
         return null;
     }
+    
     newGrid[y][x].isDiscovered = true;
     return newGrid;
 }

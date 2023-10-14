@@ -68,7 +68,10 @@ const Game = () => {
     const [ computerStrategy, setComputerStrategy ] = useState({
         next: [],
         plan: [],
-        lastTry: []
+        lastTry: [],
+        firstHit: null,
+        direction: null,
+        boatHits: []
     });
     const [ setup, setSetup ] = useState(true);
     const [ setupBoats, setSetupBoats ] = useState(setupBoatsList);
@@ -170,7 +173,10 @@ const Game = () => {
       setComputerStrategy({
         next: [],
         plan: [],
-        lastTry: []
+        lastTry: [],
+        firstHit: null,
+        direction: null,
+        boatHits: []
       });
       setWin(false);
       setSetup(true);
