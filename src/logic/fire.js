@@ -1,5 +1,4 @@
 const fire = (player, grid, x, y) => {
-    
     let newGrid = JSON.parse(JSON.stringify(grid))
     if (
         !player ||
