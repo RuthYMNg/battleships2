@@ -1,7 +1,4 @@
 const fire = (player, grid, x, y) => {
-    console.log("FIRING ON X = ",x,"Y = ",y);
-    
-    
     let newGrid = JSON.parse(JSON.stringify(grid))
     if (
         !player ||

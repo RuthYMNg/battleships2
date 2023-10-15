@@ -38,9 +38,7 @@ const allAdjacentCellsDiscovered = (cell, grid) => {
     );
 };
 
-const createFinalStrategy = (grid) => {
-    console.log('&&&&&&&&&&& FINAL STRAT');
-    
+const createFinalStrategy = (grid) => {    
     return grid.reduce((acc, row, i) => {
         row.forEach((cell, j) => {
             if (!cell.isDiscovered) {
@@ -79,9 +77,7 @@ function countUndiscoveredShips(grid) {
     return count;
 }
 
-function prioritiseStrategyPlan(strategy, grid) {
-    console.log("**************************************************PRIORITISTING");
-    
+function prioritiseStrategyPlan(strategy, grid) {    
     if (countUndiscoveredShips(grid) === 2) {
         strategy.plan.sort((a, b) => {
             const aCell = (a && grid[a[1]] && grid[a[1]][a[0]]) ? grid[a[1]][a[0]] : null;
@@ -191,12 +187,10 @@ const processCell = (cell, grid, strategy) => {
                 allAdjacentCellsDiscovered(cell, grid)
             )
             ) {
-            console.log("RESETTING NOW.");
             updatedStrategy.firstHit = null;
             updatedStrategy.boatHits = [];
             updatedStrategy.direction = null;
         }
-        console.log("updatedStrategy IS 1", updatedStrategy);
         
         return {strategy: updatedStrategy, value: true};
     }
@@ -210,21 +204,16 @@ const processCell = (cell, grid, strategy) => {
             allAdjacentCellsDiscovered(cell, grid)
         )
         ) {
-        console.log("RESETTING NOW.");
         updatedStrategy.firstHit = null;
         updatedStrategy.boatHits = [];
         updatedStrategy.direction = null;
     }
-    console.log("updatedStrategy IS 2", strategy);
 
     return {strategy: updatedStrategy, value: false};
 }
 
 
-const computerStrategy = (inputStrategy, grid) => {
-    console.log("**********NEW*********");
-    
-    
+const computerStrategy = (inputStrategy, grid) => {    
     if (inputStrategy.computerStrategy) {
         inputStrategy = inputStrategy.computerStrategy;
     }
@@ -238,7 +227,6 @@ const computerStrategy = (inputStrategy, grid) => {
     prioritiseStrategyPlan(strategy, grid);
 
     while (strategy.next.length) {
-        console.log('we are processing strategy next', strategy.next[0]);
         let processed = processCell(strategy.next[0], grid, strategy);
         if (processed.value) {
             strategy = processed.strategy;
@@ -246,35 +234,27 @@ const computerStrategy = (inputStrategy, grid) => {
                 strategy.direction && 
                 strategy.next.length < 2
                 ) {
-                console.log("RESETTING NOW.");
                 strategy.firstHit = null;
                 strategy.boatHits = [];
                 strategy.direction = null;
             }
             strategy.next.shift();
-            console.log("here's the final strategy!", strategy);
-
             return strategy;
         }
         strategy.next.shift();
     }
 
-    if (strategy.plan.length < 2) {
-        console.log('NEW STRAT &&&&&&&&&&&&&');
-        
+    if (strategy.plan.length < 2) {        
         strategy.plan = getStrategy(grid);
         strategy.plan = strategy.plan.flat();
     }
 
     while (strategy.plan.length) {
-        console.log('we are processing strategy plan', strategy.plan[0]);
         let processed = processCell(strategy.plan[0], grid, strategy);
         
         if (processed.value) {
             strategy = processed.strategy;
-            strategy.plan.shift();
-            console.log("here's the final strategy!", strategy);
-            
+            strategy.plan.shift();            
             return strategy;
         }
         strategy.plan.shift();
@@ -288,21 +268,16 @@ const computerStrategy = (inputStrategy, grid) => {
         });
 
         while (strategy.plan.length) {
-            console.log('we are processing strategy plan', strategy.plan[0]);
             let processed = processCell(strategy.plan[0], grid, strategy);
             
             if (processed.value) {
                 strategy = processed.strategy;
-                strategy.plan.shift();
-                console.log("here's the final strategy!", strategy);
-                
+                strategy.plan.shift();                
                 return strategy;
             }
             strategy.plan.shift();
         }
-    }
-    console.log(strategy);
-    
+    }    
     return strategy;
 }
 

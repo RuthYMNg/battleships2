@@ -2,77 +2,75 @@ const getStrategy = (grid) => {
     if (!grid) {
         return [];
     }
+    let random = Math.random()
+    // Determine the strategy
+    let strategy = random < 0.6 ? "randomDiagonal" : random < 0.8 ? "forwardDiagonal" : "backwardDiagonal";
+    let plan = [];
+    let isEven = Math.random() < 0.5;
 
-    const random = Math.random();
-    let strategy =  random < 0.5 ? "randomDiagonal" : random < 0.75 ? "forwardDiagonal" : "backwardDiagonal";
+    // Generate 10 strategy sets
+    for (let i = 0; i < 10; i++) {
+        // Determine the number of diagonal sets based on a random number (from 1 to 4).
+        let sets = Math.round(Math.random() * 2) + 1;
+        // Determine whether to use 'A' sets or 'B' sets based on a random number. A sets start from the top, B sets start from the bottom
+        let backwards = Math.random() < 0.5;
 
-    if (strategy === "randomDiagonal") {
-        let plan = [];
-        let isEven = Math.random() < 0.5
-        for (let i = 0; i < 10; i++) {
-            let sets = Math.round(Math.random() * 3) + 1;
-            let isForwards = Math.random() < 0.5
-            let aSet = Math.random() < 0.5
-            isForwards 
-                ? aSet ? getDiagonalForwardsASets(grid.length, sets, isEven, true).forEach((set) => {
-                    plan.push(set)
-                }) : getDiagonalForwardsBSets(grid.length, sets, isEven, true).forEach((set) => {
-                    plan.push(set)
-                })
-                : aSet ? getDiagonalBackwardsASets(grid.length, sets, isEven, true).forEach((set) => {
-                    plan.push(set)
-                }) : getDiagonalBackwardsBSets(grid.length, sets, isEven, true).forEach((set) => {
-                    plan.push(set)
-                })
-        }
-        return plan.reduce((acc, el) => {
-            if (el.length) {
-                acc.push(el);
+        if (strategy === "randomDiagonal") {
+            let isForwards = Math.random() < 0.5;
+            if (isForwards) {
+                if (!backwards) {
+                    let result = getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
+                    result.forEach(set => plan.push(set));
+                } else {
+                    let result = getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
+                    result.forEach(set => plan.push(set));
+                }
+            } else {
+                if (!backwards) {
+                    let result = getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
+                    result.forEach(set => plan.push(set.reverse()));
+                } else {
+                    let result = getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
+                    result.forEach(set => plan.push(set.reverse()));
+                }
             }
-            return acc;
-        }, []);
+        }
+
+        if (strategy === "forwardDiagonal") {
+            if (!backwards) {
+                let result = getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
+                result.forEach(set => plan.push(set));
+            } else {
+                let result = getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
+                result.forEach(set => plan.push(set));
+            }
+        }
+
+        if (strategy === "backwardDiagonal") {
+            if (!backwards) {
+                console.log("left and up");
+                
+                let result = getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
+                result.forEach(set => plan.push(set.reverse()));
+            } else {
+                console.log("left and down");
+
+                let result = getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
+                result.forEach(set => plan.push(set.reverse()));
+            }
+        }
     }
 
-    if (strategy === "forwardDiagonal") {
-        let plan = [];
-        let isEven = Math.random() < 0.5
-        for (let i = 0; i < 10; i++) {
-            let sets = Math.round(Math.random() * 3) + 1;
-            let aSet = Math.random() < 0.5
-            aSet ? getDiagonalForwardsASets(grid.length, sets, isEven, true).forEach((set) => {
-                    plan.push(set)
-                }) : getDiagonalForwardsBSets(grid.length, sets, isEven, true).forEach((set) => {
-                    plan.push(set)
-                })
+    plan = plan.reduce((acc, el) => {
+        if (el.length) {
+            acc.push(el);
         }
-        return plan.reduce((acc, el) => {
-            if (el.length) {
-                acc.push(el);
-            }
-            return acc;
-        }, []);
-    }
-
-    if (strategy === "backwardDiagonal") {
-        let plan = [];
-        let isEven = Math.random() < 0.5
-        for (let i = 0; i < 10; i++) {
-            let sets = Math.round(Math.random() * 3) + 1;
-            let aSet = Math.random() < 0.5
-            aSet ? getDiagonalBackwardsASets(grid.length, sets, isEven, true).forEach((set) => {
-                    plan.push(set)
-                }) : getDiagonalForwardsBSets(grid.length, sets, isEven, true).forEach((set) => {
-                    plan.push(set)
-                })
-        }
-        return plan.reduce((acc, el) => {
-            if (el.length) {
-                acc.push(el);
-            }
-            return acc;
-        }, []);
-    }
+        return acc;
+    }, []);
+    
+    return plan;
 }
+
 
 // const strategyTypes = [
 //     "randomDiagonal",
@@ -86,91 +84,60 @@ const getStrategy = (grid) => {
 //     "stepped"
 // ]
 
-const getDiagonalForwardsASets = (length, sets, even, random) => {
+const getDiagonalsGoingRightAndDown = (length, sets, even) => {        
     let result = [];
-    let startingPoint = Math.round(Math.random()) * length;
     for (let i = 0; i < sets; i++) {
         let diagonalRow = [];
-        let randomStart = Math.round(Math.random() * (length / 2)) * 2;
-        if (!even) {
-            randomStart = randomStart - 1 > 0 ? randomStart - 1 : 1
-        }
+        let maxEvenStarts = length % 2 === 0 ? length / 2 : (length + 1) / 2;
+        let maxOddStarts = length - maxEvenStarts;
+        let randomStart = even 
+            ? 2 * Math.floor(Math.random() * maxEvenStarts)
+            : 1 + 2 * Math.floor(Math.random() * maxOddStarts);
         let fromSide = Math.random() < 0.5;
-        let i = 0, j = random ? randomStart : startingPoint;
+        let i = 0, j = randomStart;
         while (i < length && j < length) {
             diagonalRow.push(fromSide ? [i, j] : [j, i])
             i++
             j++
         }
-        startingPoint = startingPoint === length - 1 ? 0 : startingPoint + 2
-        result.push(diagonalRow)
+        result.push(diagonalRow);
     }
+    
     return result;
 }
 
-const getDiagonalForwardsBSets = (length, sets, even, random) => {
+const getDiagonalsGoingRightAndUp = (length, sets, even) => {        
     let result = [];
-    let startingPoint = Math.round(Math.random()) * length - 1;
-    for (let i = 0; i < sets; i++) {
+    for (let s = 0; s < sets; s++) {
         let diagonalRow = [];
-        let randomStart = Math.round(Math.random() * (length / 2)) * 2 - 1;
-        if (!even) {
-            randomStart = randomStart - 1 > 0 ? randomStart - 1 : 1
-        }
-        let fromSide = Math.random() < 0.5;
-        let i = length - 1, j = random ? randomStart : startingPoint;
-        while (i >= 0 && j >= 0) {
-            diagonalRow.push(fromSide ? [i, j] : [j, i])
-            i--
-            j--
-        }
-        startingPoint = startingPoint === length - 1 ? 0 : startingPoint + 2
-        result.push(diagonalRow)
-    }
-    return result;
-}
+        let maxEvenStarts = length % 2 === 0 ? length / 2 : (length + 1) / 2;
+        let maxOddStarts = length - maxEvenStarts;
 
-const getDiagonalBackwardsASets = (length, sets, even, random) => {
-    let result = [];
-    let startingPoint = Math.round(Math.random()) * length;
-    for (let i = 0; i < sets; i++) {
-        let diagonalRow = [];
-        let randomStart = Math.round(Math.random() * (length / 2)) * 2 - 1;
-        if (!even) {
-            randomStart = randomStart - 1 > 0 ? randomStart - 1 : 1
-        }
+        let randomStart = even 
+            ? 2 * Math.floor(Math.random() * maxEvenStarts)
+            : 1 + 2 * Math.floor(Math.random() * maxOddStarts);
         let fromSide = Math.random() < 0.5;
-        let i = 0, j = random ? randomStart : startingPoint;
-        while (i >= 0 && j >= 0) {
-            diagonalRow.push(fromSide ? [i, j] : [j, i])
-            i++
-            j--
+        let i, j;
+        if (fromSide) {
+            i = 0;
+            j = randomStart;
+            while (i >= 0 && j >= 0) {
+                diagonalRow.push(fromSide ? [i, j] : [j, i])
+                i++
+                j--
+            }
+        } else {
+            i = length; 
+            j = randomStart;
+            while (i >= 0 && j >= 0) {
+                diagonalRow.push(fromSide ? [i, j] : [j, i])
+                i--
+                j++
+            }
         }
-        startingPoint = startingPoint === length - 1 ? 0 : startingPoint + 2
-        result.push(diagonalRow)
+        result.push(diagonalRow);
     }
-    return result;
-}
-
-const getDiagonalBackwardsBSets = (length, sets, even, random) => {
-    let result = [];
-    let startingPoint = Math.round(Math.random()) * length;
-    for (let i = 0; i < sets; i++) {
-        let diagonalRow = [];
-        let randomStart = Math.round(Math.random() * (length / 2)) * 2 - 1;
-        if (!even) {
-            randomStart = randomStart - 1 > 0 ? randomStart - 1 : 1
-        }
-        let fromSide = Math.random() < 0.5;
-        let i = length - 1, j = random ? randomStart : startingPoint;
-        while (i >= 0 && j >= 0) {
-            diagonalRow.push(fromSide ? [i, j] : [j, i])
-            i--
-            j++
-        }
-        startingPoint = startingPoint === length - 1 ? 0 : startingPoint + 2
-        result.push(diagonalRow)
-    }
+    
     return result;
 }
 
