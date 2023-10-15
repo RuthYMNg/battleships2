@@ -3,60 +3,49 @@ const getStrategy = (grid) => {
         return [];
     }
     let random = Math.random()
-    // Determine the strategy
     let strategy = random < 0.6 ? "randomDiagonal" : random < 0.8 ? "forwardDiagonal" : "backwardDiagonal";
     let plan = [];
     let isEven = Math.random() < 0.5;
 
-    // Generate 10 strategy sets
     for (let i = 0; i < 10; i++) {
-        // Determine the number of diagonal sets based on a random number (from 1 to 4).
         let sets = Math.round(Math.random() * 2) + 1;
-        // Determine whether to use 'A' sets or 'B' sets based on a random number. A sets start from the top, B sets start from the bottom
         let backwards = Math.random() < 0.5;
 
+        let result;
         if (strategy === "randomDiagonal") {
             let isForwards = Math.random() < 0.5;
-            if (isForwards) {
-                if (!backwards) {
-                    let result = getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
-                    result.forEach(set => plan.push(set));
-                } else {
-                    let result = getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
-                    result.forEach(set => plan.push(set));
+            result = isForwards 
+                ? getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
+                : getDiagonalsGoingRightAndUp(grid.length, sets, isEven);
+            
+            if (!isForwards) {
+                for (let set of result) {
+                    plan.push(set.reverse());
                 }
             } else {
-                if (!backwards) {
-                    let result = getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
-                    result.forEach(set => plan.push(set.reverse()));
-                } else {
-                    let result = getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
-                    result.forEach(set => plan.push(set.reverse()));
+                for (let set of result) {
+                    plan.push(set);
                 }
             }
         }
 
         if (strategy === "forwardDiagonal") {
-            if (!backwards) {
-                let result = getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
-                result.forEach(set => plan.push(set));
-            } else {
-                let result = getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
-                result.forEach(set => plan.push(set));
+            result = backwards 
+                ? getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
+                : getDiagonalsGoingRightAndDown(grid.length, sets, isEven);
+            
+            for (let set of result) {
+                plan.push(set);
             }
         }
 
         if (strategy === "backwardDiagonal") {
-            if (!backwards) {
-                console.log("left and up");
-                
-                let result = getDiagonalsGoingRightAndDown(grid.length, sets, isEven)
-                result.forEach(set => plan.push(set.reverse()));
-            } else {
-                console.log("left and down");
-
-                let result = getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
-                result.forEach(set => plan.push(set.reverse()));
+            result = backwards 
+                ? getDiagonalsGoingRightAndUp(grid.length, sets, isEven)
+                : getDiagonalsGoingRightAndDown(grid.length, sets, isEven);
+            
+            for (let set of result) {
+                plan.push(set.reverse());
             }
         }
     }
@@ -69,7 +58,7 @@ const getStrategy = (grid) => {
     }, []);
     
     return plan;
-}
+};
 
 
 // const strategyTypes = [
