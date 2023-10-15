@@ -139,13 +139,20 @@ const Game = () => {
       const timer = 300 + Math.random() * 1000;
 
       setTimeout(() => {
-          let strategy = fetchComputerStrategy(computerStrategy, gridA)
+          let strategy = fetchComputerStrategy(computerStrategy, gridA);
 
           setComputerStrategy({
               computerStrategy: strategy
           })
+          
+          let firedGrid;
 
-          const firedGrid = fire(player, gridA.slice(), strategy.lastTry[0], strategy.lastTry[1])
+          if (strategy.next.length) {
+            firedGrid = fire(player, gridA.slice(), strategy.lastTry[0], strategy.lastTry[1]);
+          } else {
+            firedGrid = fire(player, gridA.slice(), strategy.lastTry[0], strategy.lastTry[1])
+          }
+
 
           setGridA(firedGrid);
           setPlayer("A");
