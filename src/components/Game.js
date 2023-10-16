@@ -7,7 +7,7 @@ import Instructions from './Instructions.js';
 import boatsObject from '../logic/boatsObject.js';
 import setupBoatsList from '../logic/setupBoats.js';
 import generateGrid from '../logic/generateGrid.js';
-import fetchComputerStrategy from '../logic/computerStrategy.js';
+import { computerStrategy as fetchComputerStrategy } from '../logic/computerStrategy.js';
 import fire from '../logic/fire.js';
 import createGame from '../logic/createGame.js';
 

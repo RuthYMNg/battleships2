@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import tryToPlace from '../tryToPlace.js';
+import { tryToPlace, isOverlap, isWithinBounds } from '../tryToPlace.js';
 import generateGrid from '../generateGrid.js';
 
 const standardBoats = [
@@ -183,5 +183,45 @@ describe('tryToPlace', () => {
         expect(result).to.haveOwnProperty("x");
         expect(result).to.haveOwnProperty("y");
         expect(result).to.haveOwnProperty("dir");
+    });
+});
+
+describe('isWithinBounds', () => {
+    const grid = [
+        [{ isShip: false }, { isShip: false }, { isShip: false }],
+        [{ isShip: false }, { isShip: false }, { isShip: false }],
+        [{ isShip: false }, { isShip: false }, { isShip: false }]
+    ];
+
+    it('should return true for valid positions', () => {
+        expect(isWithinBounds(1, 1, 2, grid, 'right')).to.be.true;
+        expect(isWithinBounds(1, 1, 2, grid, 'down')).to.be.true;
+    });
+
+    it('should return false for out-of-bound positions', () => {
+        expect(isWithinBounds(1, 1, 3, grid, 'right')).to.be.false;
+        expect(isWithinBounds(1, 1, 3, grid, 'down')).to.be.false;
+    });
+
+    it('should handle invalid directions', () => {
+        expect(isWithinBounds(1, 1, 2, grid, 'diagonal')).to.be.false;
+    });
+});
+
+describe('isOverlap', () => {
+    const gridWithShip = [
+        [{ isShip: false }, { isShip: false }, { isShip: true }],
+        [{ isShip: false }, { isShip: true }, { isShip: false }],
+        [{ isShip: true }, { isShip: false }, { isShip: false }]
+    ];
+
+    it('should return true if there is overlap', () => {
+        expect(isOverlap(1, 0, 2, gridWithShip, 'right')).to.be.true;
+        expect(isOverlap(0, 2, 2, gridWithShip, 'down')).to.be.true;
+    });
+
+    it('should return false if there is no overlap', () => {
+        expect(isOverlap(0, 0, 2, gridWithShip, 'right')).to.be.false;
+        expect(isOverlap(0, 0, 2, gridWithShip, 'down')).to.be.false;
     });
 });

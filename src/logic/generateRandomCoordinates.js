@@ -1,7 +1,8 @@
 const generateRandomCoordinates = (width, height) => {
-    const newWidth = Math.floor(Math.random() * width)
-    const newHeight = Math.floor(Math.random() * height)
-    return [newWidth, newHeight];
+    return [
+        Math.floor(Math.random() * width),
+        Math.floor(Math.random() * height)
+    ];
 }
 
 export default generateRandomCoordinates;
