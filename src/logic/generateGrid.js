@@ -1,12 +1,8 @@
-const generateGrid = (width, height) => {
+const generateGrid = (width = 10, height = 10) => {
     const result = [];
-    width = width ? width : 10;
-    height = height ? height : 10;
     for (let i = 0; i < height; i++) {
-        result.push([]);
-    }
-    result.forEach(row => {
-        for (let i = 0; i < width; i++) {
+        const row = [];
+        for (let j = 0; j < width; j++) {
             row.push({
                 isShip: false,
                 isDiscovered: false,
@@ -14,8 +10,9 @@ const generateGrid = (width, height) => {
                 length: null
             });
         }
-    });
+        result.push(row);
+    }
     return result;
-}   
+}
 
 export default generateGrid;

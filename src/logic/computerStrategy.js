@@ -281,4 +281,18 @@ const computerStrategy = (inputStrategy, grid) => {
     return strategy;
 }
 
-export default computerStrategy;
+export {
+    getStrategy,
+    format,
+    isCellValid,
+    getAdjacentCells,
+    allAdjacentCellsDiscoveredAndNotShip,
+    allAdjacentCellsDiscovered,
+    createFinalStrategy,
+    isAdjacentToDiscoveredShip,
+    isPartOfUndiscoveredRowOrColumn,
+    countUndiscoveredShips,
+    prioritiseStrategyPlan,
+    processCell,
+    computerStrategy
+};
