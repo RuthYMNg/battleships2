@@ -1,7 +1,7 @@
 import generateGrid from './generateGrid.js';
 import checkBoats from './checkBoats.js';
 import updateGrid from './updateGrid.js';
-import tryToPlace from './tryToPlace.js';
+import { tryToPlace } from './tryToPlace.js';
 import generateRandomCoordinates from './generateRandomCoordinates.js';
 import generateRandomDirection from './generateRandomDirection.js';
 
@@ -22,26 +22,24 @@ const createGame = (gridA, gridB, boats) => {
     // Player A
 
     boats.forEach(boat => {
-        let go = true;
-        while (go) {
-            let result = tryToPlace(gridA, boat, generateRandomCoordinates(width, height), generateRandomDirection())
-            if (result != null) {
-                go = false;
+        while (true) {
+            let result = tryToPlace(gridA, boat, generateRandomCoordinates(width, height), generateRandomDirection());
+            if (result) {
                 gridA = updateGrid(gridA, result);
-            } 
+                break;
+            }
         }
     });
 
     // Player B
 
     boats.forEach(boat => {
-        let go = true;
-        while (go) {
-            let result = tryToPlace(gridB, boat, generateRandomCoordinates(width, height), generateRandomDirection())
-            if (result != null) {
-                go = false;
+        while (true) {
+            let result = tryToPlace(gridB, boat, generateRandomCoordinates(width, height), generateRandomDirection());
+            if (result) {
                 gridB = updateGrid(gridB, result);
-            } 
+                break;
+            }
         }
     });
 
